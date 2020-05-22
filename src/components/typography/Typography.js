@@ -16,10 +16,10 @@ export const Heading2 = styled.Text`
 `;
 
 export const Paragraph = styled.Text`
-  font-size: 20px;
+  font-size: 16px;
   font-family: 'Roboto-Light';
   color: ${colors.textColor};
-  line-height: 30px;
+  line-height: 24px;
 `;
 
 export const Label = styled.Text`

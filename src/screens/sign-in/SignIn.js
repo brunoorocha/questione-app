@@ -31,10 +31,10 @@ export default function SignIn({ navigation }) {
         <FieldsView>
           <TextField
             keyboardType="email-address"
-            placeholder="Email:"
+            label="Email"
             marginBottom={16}
           />
-          <TextField secureTextEntry={true} placeholder="Senha:" />
+          <TextField secureTextEntry={true} label="Senha" />
           <LinkButton onPress={onPressForgotMyPassword}>
             Esqueci minha senha
           </LinkButton>
