@@ -8,14 +8,10 @@ export default function SignUp() {
       <HeaderView>
         <Heading2>Crie uma nova conta</Heading2>
       </HeaderView>
-      <TextField placeholder="Nome completo:" marginBottom={16} />
-      <TextField placeholder="CPF:" marginBottom={16} />
-      <TextField placeholder="Email:" marginBottom={16} />
-      <TextField
-        placeholder="Senha:"
-        marginBottom={16}
-        secureTextEntry={true}
-      />
+      <TextField label="Nome completo" marginBottom={16} />
+      <TextField label="CPF" marginBottom={16} />
+      <TextField label="Email" marginBottom={16} />
+      <TextField label="Senha" marginBottom={16} secureTextEntry={true} />
       <PrimaryButton>Criar conta</PrimaryButton>
     </Content>
   );

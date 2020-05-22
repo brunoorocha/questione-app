@@ -19,7 +19,7 @@ export default function ForgotPassword() {
           enviando um link para que você possa redefinir a sua senha.
         </Paragraph>
       </HeaderView>
-      <TextField placeholder="Seu email:" marginBottom={16} />
+      <TextField label="Seu email" marginBottom={16} />
       <PrimaryButton>Enviar</PrimaryButton>
     </Content>
   );

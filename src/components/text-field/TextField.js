@@ -3,22 +3,11 @@ import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../colors/Colors';
 
-// export const TextField = styled.TextInput`
-//   height: 48px;
-//   padding: 0px 16px;
-//   border: 1px solid ${colors.lightGray};
-//   font-size: 16px;
-//   font-family: 'Roboto-Regular';
-//   border-radius: 8px;
-//   margin-bottom: ${(props) =>
-//     props.marginBottom ? `${props.marginBottom}px` : '0px'};
-// `;
-
 const TextFieldView = styled.View`
   height: 48px;
   padding: 0px 16px;
   border: 1px solid
-    ${(props) => (props.fieldHasFocus ? colors.primaryColor : colors.lightGray)};
+    ${(props) => (props.isActive ? colors.primaryColor : colors.lightGray)};
   font-size: 16px;
   font-family: 'Roboto-Regular';
   border-radius: 8px;
@@ -28,11 +17,12 @@ const TextFieldView = styled.View`
 
 const FieldLabel = styled.Text`
   font-size: ${(props) => (props.isActive ? '12px' : '16px')};
+  transform: translateY(${(props) => (props.isActive ? '-8px' : '12px')});
   font-family: 'Roboto-Regular';
   color: ${colors.darkGray};
-  transform: translateY(${(props) => (props.isActive ? '-8px' : '12px')});
   background-color: ${colors.white};
   padding: 0px 4px;
+  align-self: flex-start;
 `;
 
 const TextInput = styled.TextInput`
@@ -73,18 +63,18 @@ export const TextField = (props) => {
 
   return (
     <TouchableWithoutFeedback onPress={didTapOnTextFieldView}>
-      <TextFieldView fieldHasFocus={isFocused} {...props}>
+      <TextFieldView isActive={isFocused} {...props}>
         <FieldLabel isActive={isActive}>{props.label ?? ''}</FieldLabel>
         <TextInput
           keyboardType={props.keyboardType ?? 'default'}
           secureTextEntry={props.secureTextEntry}
           onFocus={onFocus}
           onBlur={onBlur}
+          onChangeText={onChangeText}
+          value={value}
           ref={(input) => {
             textInputRef = input;
           }}
-          onChangeText={onChangeText}
-          value={value}
         />
       </TextFieldView>
     </TouchableWithoutFeedback>
