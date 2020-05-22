@@ -21,6 +21,10 @@ export default function SignIn({ navigation }) {
     navigation.push(routesNames.signUp);
   };
 
+  const onPressSignIn = () => {
+    navigation.push(routesNames.home);
+  };
+
   return (
     <SafeAreaView>
       <Content>
@@ -39,7 +43,7 @@ export default function SignIn({ navigation }) {
             Esqueci minha senha
           </LinkButton>
         </FieldsView>
-        <PrimaryButton>Entrar</PrimaryButton>
+        <PrimaryButton onPress={onPressSignIn}>Entrar</PrimaryButton>
 
         <FooterView>
           <Label textAlign="center">Você ainda não tem conta?</Label>

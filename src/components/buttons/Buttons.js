@@ -34,7 +34,7 @@ const ButtonText = styled.Text`
 `;
 
 export const PrimaryButton = (props) => (
-  <PrimaryButtonContainer activeOpacity={0.7}>
+  <PrimaryButtonContainer onPress={props.onPress} activeOpacity={0.7}>
     <ButtonText>{props.children}</ButtonText>
   </PrimaryButtonContainer>
 );
