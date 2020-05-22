@@ -13,8 +13,12 @@ import logo from '../../assets/images/logo-black-blue.png';
 import { routesNames } from '../../routes';
 
 export default function SignIn({ navigation }) {
-  const onForgotMyPasswordPress = () => {
+  const onPressForgotMyPassword = () => {
     navigation.push(routesNames.forgotPassword);
+  };
+
+  const onPressSignUp = () => {
+    navigation.push(routesNames.signUp);
   };
 
   return (
@@ -31,7 +35,7 @@ export default function SignIn({ navigation }) {
             marginBottom={16}
           />
           <TextField secureTextEntry={true} placeholder="Senha:" />
-          <LinkButton onPress={onForgotMyPasswordPress}>
+          <LinkButton onPress={onPressForgotMyPassword}>
             Esqueci minha senha
           </LinkButton>
         </FieldsView>
@@ -39,7 +43,9 @@ export default function SignIn({ navigation }) {
 
         <FooterView>
           <Label textAlign="center">Você ainda não tem conta?</Label>
-          <LinkButton textAlign="center">Cadastre-se aqui</LinkButton>
+          <LinkButton textAlign="center" onPress={onPressSignUp}>
+            Cadastre-se aqui
+          </LinkButton>
         </FooterView>
       </Content>
     </SafeAreaView>

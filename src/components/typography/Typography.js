@@ -10,7 +10,7 @@ export const Heading1 = styled.Text`
 
 export const Heading2 = styled.Text`
   font-size: 24px;
-  font-family: 'Roboto-Black';
+  font-family: 'Roboto-Bold';
   color: ${colors.textColor};
   margin-bottom: 16px;
 `;
