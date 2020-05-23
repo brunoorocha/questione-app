@@ -6,13 +6,13 @@ import { colors } from '../';
 
 Icon.loadFont();
 
-const BackButtonView = styled.View`
+const BackButtonView = styled.TouchableWithoutFeedback`
   margin-left: ${Platform.OS === 'ios' ? '16px' : '0px'};
 `;
 
-export const BackButton = () => {
+export const BackButton = (props) => {
   return (
-    <BackButtonView>
+    <BackButtonView onPress={props.onPress}>
       <Icon name="arrow-back" color={colors.primaryColor} size={24} />
     </BackButtonView>
   );

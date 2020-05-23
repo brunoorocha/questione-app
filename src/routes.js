@@ -44,15 +44,12 @@ function EvaluationNavigation() {
       <Stack.Screen
         name={routesNames.enterCode}
         component={EnterCode}
-        options={{
-          ...defaultOptions,
-          title: 'Realizar avaliação',
-        }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={routesNames.question}
         component={Question}
-        options={{ ...defaultOptions, headerShown: false }}
+        options={{ headerShown: false }}
       />
     </EvaluationStack.Navigator>
   );
