@@ -29,6 +29,15 @@ export const Heading4 = styled.Text`
   color: ${(props) => props.color ?? colors.textColor};
   line-height: 18px;
   text-transform: uppercase;
+  margin-bottom: 8px;
+`;
+
+export const Uppercased = styled.Text`
+  font-size: 12px;
+  font-family: 'Roboto-Bold';
+  color: ${(props) => props.color ?? colors.textColor};
+  line-height: 18px;
+  text-transform: uppercase;
 `;
 
 export const Paragraph = styled.Text`

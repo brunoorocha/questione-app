@@ -19,3 +19,11 @@ export const MoreButton = (props) => {
     </ButtonWrapper>
   );
 };
+
+export const CloseButton = (props) => {
+  return (
+    <ButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
+      <Icon name="close" size={20} color={colors.textColor} />
+    </ButtonWrapper>
+  );
+};

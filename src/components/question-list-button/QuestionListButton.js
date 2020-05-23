@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Heading4 } from '../typography/Typography';
+import { Uppercased } from '../typography/Typography';
 import { colors } from '../colors/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -17,7 +17,7 @@ const ButtonWrapper = styled.TouchableOpacity`
 export const QuestionListButton = (props) => {
   return (
     <ButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
-      <Heading4>{props.title}</Heading4>
+      <Uppercased>{props.title}</Uppercased>
       <Icon name="keyboard-arrow-down" size={16} color={colors.textColor} />
     </ButtonWrapper>
   );

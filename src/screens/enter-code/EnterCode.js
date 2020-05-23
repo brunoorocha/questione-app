@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar, Keyboard } from 'react-native';
 import {
   Heading3,
-  Heading4,
+  Uppercased,
   ForwardButton,
   NavigationBar,
   SafeAreaView,
@@ -44,7 +44,7 @@ export default function EnterCode({ navigation }) {
       <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
       <NavigationBar
         navigation={navigation}
-        title={<Heading4>Realizar avaliação</Heading4>}
+        title={<Uppercased>Realizar avaliação</Uppercased>}
       />
 
       <Content>

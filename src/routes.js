@@ -8,6 +8,8 @@ import SignUp from './screens/sign-up/SignUp';
 import Home from './screens/home/Home';
 import EnterCode from './screens/enter-code/EnterCode';
 import Question from './screens/question/Question';
+import QuestionDetails from './screens/question-details/QuestionDetails';
+import QuestionList from './screens/question-list/QuestionList';
 import { colors, BackButton } from './components';
 
 const Stack = createStackNavigator();
@@ -33,9 +35,11 @@ export const routesNames = {
   forgotPassword: 'ForgotPassword',
   signUp: 'SignUp',
   home: 'Home',
+  evaluation: 'Evaluation',
   enterCode: 'EnterCode',
   question: 'Question',
-  evaluation: 'Evaluation',
+  questionDetails: 'QuestionDetails',
+  questionList: 'QuestionList',
 };
 
 function EvaluationNavigation() {
@@ -49,7 +53,17 @@ function EvaluationNavigation() {
       <Stack.Screen
         name={routesNames.question}
         component={Question}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name={routesNames.questionDetails}
+        component={QuestionDetails}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name={routesNames.questionList}
+        component={QuestionList}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
     </EvaluationStack.Navigator>
   );

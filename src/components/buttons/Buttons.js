@@ -14,7 +14,7 @@ const Link = styled.Text`
   text-align: ${(props) => props.textAlign ?? 'left'};
 `;
 
-const PrimaryButtonContainer = styled.TouchableOpacity`
+const PrimaryButtonWrapper = styled.TouchableOpacity`
   background-color: ${colors.primaryColor};
   height: 48px;
   display: flex;
@@ -31,7 +31,7 @@ const ButtonText = styled.Text`
   font-size: 16px;
 `;
 
-const SecondaryButtonContainer = styled.TouchableOpacity`
+const SecondaryButtonWrapper = styled.TouchableOpacity`
   background-color: transparent;
   height: 48px;
   display: flex;
@@ -60,22 +60,22 @@ export const LinkButton = (props) => (
 );
 
 export const PrimaryButton = (props) => (
-  <PrimaryButtonContainer onPress={props.onPress} activeOpacity={0.7}>
+  <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
     <ButtonText>{props.children}</ButtonText>
-  </PrimaryButtonContainer>
+  </PrimaryButtonWrapper>
 );
 
 export const SecondaryButton = (props) => (
-  <SecondaryButtonContainer activeOpacity={0.7}>
+  <SecondaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
     <SecondaryButtonText>{props.children}</SecondaryButtonText>
-  </SecondaryButtonContainer>
+  </SecondaryButtonWrapper>
 );
 
 export const ForwardButton = (props) => (
-  <PrimaryButtonContainer onPress={props.onPress} activeOpacity={0.7}>
+  <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
     <ButtonText>{props.children}</ButtonText>
     <ForwardButtonIcon>
       <Icon name="arrow-forward" color={colors.white} size={24} />
     </ForwardButtonIcon>
-  </PrimaryButtonContainer>
+  </PrimaryButtonWrapper>
 );
