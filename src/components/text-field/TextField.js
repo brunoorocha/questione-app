@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../colors/Colors';
@@ -37,8 +37,7 @@ export const TextField = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState('');
-
-  var textInputRef = useRef();
+  let textInputRef;
 
   const onFocus = () => {
     setIsFocused(true);

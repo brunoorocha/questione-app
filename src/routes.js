@@ -1,17 +1,17 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import SignIn from './screens/sign-in/SignIn';
 import ForgotPassword from './screens/forgot-password/ForgotPassword';
 import SignUp from './screens/sign-up/SignUp';
 import Home from './screens/home/Home';
 import EnterCode from './screens/enter-code/EnterCode';
-import { colors } from './components';
+import Question from './screens/question/Question';
+import { colors, BackButton } from './components';
 
-Icon.loadFont();
 const Stack = createStackNavigator();
+const EvaluationStack = createStackNavigator();
 
 const defaultOptions = {
   headerStyle: { backgroundColor: colors.white },
@@ -25,6 +25,7 @@ const defaultOptions = {
     color: colors.textColor,
     fontWeight: 'bold',
   },
+  headerBackImage: () => <BackButton />,
 };
 
 export const routesNames = {
@@ -33,7 +34,29 @@ export const routesNames = {
   signUp: 'SignUp',
   home: 'Home',
   enterCode: 'EnterCode',
+  question: 'Question',
+  evaluation: 'Evaluation',
 };
+
+function EvaluationNavigation() {
+  return (
+    <EvaluationStack.Navigator mode="modal">
+      <Stack.Screen
+        name={routesNames.enterCode}
+        component={EnterCode}
+        options={{
+          ...defaultOptions,
+          title: 'Realizar avaliação',
+        }}
+      />
+      <Stack.Screen
+        name={routesNames.question}
+        component={Question}
+        options={{ ...defaultOptions, headerShown: false }}
+      />
+    </EvaluationStack.Navigator>
+  );
+}
 
 export default function AppNavigation() {
   return (
@@ -66,9 +89,9 @@ export default function AppNavigation() {
           }}
         />
         <Stack.Screen
-          name={routesNames.enterCode}
-          component={EnterCode}
-          options={{ ...defaultOptions, title: 'Realizar Avaliação' }}
+          name={routesNames.evaluation}
+          component={EvaluationNavigation}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

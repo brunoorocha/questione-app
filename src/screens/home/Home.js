@@ -15,7 +15,7 @@ Icon.loadFont();
 
 export default function Home({ navigation }) {
   const onPressDoTest = () => {
-    navigation.push(routesNames.enterCode);
+    navigation.push(routesNames.evaluation);
   };
 
   return (
