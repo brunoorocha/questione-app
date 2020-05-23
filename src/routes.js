@@ -7,6 +7,7 @@ import SignIn from './screens/sign-in/SignIn';
 import ForgotPassword from './screens/forgot-password/ForgotPassword';
 import SignUp from './screens/sign-up/SignUp';
 import Home from './screens/home/Home';
+import EnterCode from './screens/enter-code/EnterCode';
 import { colors } from './components';
 
 Icon.loadFont();
@@ -18,7 +19,7 @@ const defaultOptions = {
   headerTintColor: colors.primaryColor,
   headerBackTitleVisible: false,
   headerTitleStyle: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: 'Roboto-Bold',
     textTransform: 'uppercase',
     color: colors.textColor,
@@ -31,6 +32,7 @@ export const routesNames = {
   forgotPassword: 'ForgotPassword',
   signUp: 'SignUp',
   home: 'Home',
+  enterCode: 'EnterCode',
 };
 
 export default function AppNavigation() {
@@ -62,6 +64,11 @@ export default function AppNavigation() {
             ...defaultOptions,
             headerShown: false,
           }}
+        />
+        <Stack.Screen
+          name={routesNames.enterCode}
+          component={EnterCode}
+          options={{ ...defaultOptions, title: 'Realizar Avaliação' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

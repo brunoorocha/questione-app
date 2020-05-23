@@ -9,10 +9,15 @@ import {
 } from '../../components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { HeaderView } from './styles';
+import { routesNames } from '../../routes';
 
 Icon.loadFont();
 
-export default function Home() {
+export default function Home({ navigation }) {
+  const onPressDoTest = () => {
+    navigation.push(routesNames.enterCode);
+  };
+
   return (
     <View>
       <StatusBar
@@ -33,6 +38,7 @@ export default function Home() {
           title="REALIZAR AVALIAÇÃO"
           icon={<Icon name="input" color={colors.white} size={20} />}
           color={colors.blue}
+          onPress={onPressDoTest}
         />
       </HomeCardMenu>
     </View>

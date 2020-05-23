@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 import { colors } from '../colors/Colors';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+Icon.loadFont();
 
 const Link = styled.Text`
   font-family: 'Roboto-Bold';
@@ -11,16 +14,11 @@ const Link = styled.Text`
   text-align: ${(props) => props.textAlign ?? 'left'};
 `;
 
-export const LinkButton = (props) => (
-  <TouchableOpacity onPress={props.onPress} activeOpacity={0.6}>
-    <Link textAlign={props.textAlign}>{props.children}</Link>
-  </TouchableOpacity>
-);
-
 const PrimaryButtonContainer = styled.TouchableOpacity`
   background-color: ${colors.primaryColor};
   height: 48px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
@@ -32,12 +30,6 @@ const ButtonText = styled.Text`
   text-transform: uppercase;
   font-size: 16px;
 `;
-
-export const PrimaryButton = (props) => (
-  <PrimaryButtonContainer onPress={props.onPress} activeOpacity={0.7}>
-    <ButtonText>{props.children}</ButtonText>
-  </PrimaryButtonContainer>
-);
 
 const SecondaryButtonContainer = styled.TouchableOpacity`
   background-color: transparent;
@@ -56,8 +48,34 @@ const SecondaryButtonText = styled.Text`
   font-size: 16px;
 `;
 
+const ForwardButtonIcon = styled.View`
+  position: absolute;
+  right: 16px;
+`;
+
+export const LinkButton = (props) => (
+  <TouchableOpacity onPress={props.onPress} activeOpacity={0.6}>
+    <Link textAlign={props.textAlign}>{props.children}</Link>
+  </TouchableOpacity>
+);
+
+export const PrimaryButton = (props) => (
+  <PrimaryButtonContainer onPress={props.onPress} activeOpacity={0.7}>
+    <ButtonText>{props.children}</ButtonText>
+  </PrimaryButtonContainer>
+);
+
 export const SecondaryButton = (props) => (
   <SecondaryButtonContainer activeOpacity={0.7}>
     <SecondaryButtonText>{props.children}</SecondaryButtonText>
   </SecondaryButtonContainer>
+);
+
+export const ForwardButton = (props) => (
+  <PrimaryButtonContainer onPress={props.onPress} activeOpacity={0.7}>
+    <ButtonText>{props.children}</ButtonText>
+    <ForwardButtonIcon>
+      <Icon name="arrow-forward" color={colors.white} size={24} />
+    </ForwardButtonIcon>
+  </PrimaryButtonContainer>
 );

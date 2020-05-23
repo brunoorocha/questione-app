@@ -16,6 +16,10 @@ const HomeCardWrapper = styled.View`
   width: 50%;
 `;
 
+const TouchableCard = styled.TouchableHighlight`
+  border-radius: 8px;
+`;
+
 const Card = styled.View`
   border-radius: 8px;
   background-color: ${colors.white};
@@ -41,11 +45,13 @@ const TitleWrapper = styled.View`
 
 export const HomeCard = (props) => (
   <HomeCardWrapper>
-    <Card>
-      <CardIconWrapper color={props.color}>{props.icon}</CardIconWrapper>
-      <TitleWrapper>
-        <Heading4>{props.title ?? ''}</Heading4>
-      </TitleWrapper>
-    </Card>
+    <TouchableCard onPress={props.onPress} underlayColor={colors.mediumGray}>
+      <Card>
+        <CardIconWrapper color={props.color}>{props.icon}</CardIconWrapper>
+        <TitleWrapper>
+          <Heading4>{props.title ?? ''}</Heading4>
+        </TitleWrapper>
+      </Card>
+    </TouchableCard>
   </HomeCardWrapper>
 );
