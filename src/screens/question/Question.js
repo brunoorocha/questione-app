@@ -4,14 +4,21 @@ import {
   Paragraph,
   Heading4,
   SafeAreaView,
-  QuestionNavigationBar,
+  NavigationBar,
+  MoreButton,
+  QuestionListButton,
 } from '../../components';
 import { QuestionView } from './styles';
 
-export default function Question() {
+export default function Question({ navigation }) {
   return (
     <SafeAreaView>
-      <QuestionNavigationBar title="Questão 1 de 10" />
+      <NavigationBar
+        showBackButton={false}
+        navigation={navigation}
+        rightItem={<MoreButton />}
+        title={<QuestionListButton title="Questão 1 de 10" />}
+      />
       <Content>
         <QuestionView>
           <Heading4>Texto base</Heading4>

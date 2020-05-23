@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { colors, BackButton } from '..';
+import { BackButton } from '../back-button/BackButton';
+import { colors } from '../colors/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 Icon.loadFont();
