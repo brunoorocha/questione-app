@@ -36,7 +36,6 @@ export const Uppercased = styled.Text`
   font-size: 12px;
   font-family: 'Roboto-Bold';
   color: ${(props) => props.color ?? colors.textColor};
-  line-height: 18px;
   text-transform: uppercase;
 `;
 

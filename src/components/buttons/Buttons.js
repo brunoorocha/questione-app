@@ -18,6 +18,7 @@ const PrimaryButtonWrapper = styled.TouchableOpacity`
   background-color: ${colors.primaryColor};
   height: 48px;
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -35,6 +36,8 @@ const SecondaryButtonWrapper = styled.TouchableOpacity`
   background-color: transparent;
   height: 48px;
   display: flex;
+  flex: 1;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
@@ -53,6 +56,15 @@ const ForwardButtonIcon = styled.View`
   right: 16px;
 `;
 
+const BackwardButtonIcon = styled.View`
+  position: absolute;
+  left: 16px;
+`;
+
+const IconWrapper = styled.View`
+  margin-right: 16px;
+`;
+
 export const LinkButton = (props) => (
   <TouchableOpacity onPress={props.onPress} activeOpacity={0.6}>
     <Link textAlign={props.textAlign}>{props.children}</Link>
@@ -67,6 +79,7 @@ export const PrimaryButton = (props) => (
 
 export const SecondaryButton = (props) => (
   <SecondaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
+    {props.icon && <IconWrapper>{props.icon}</IconWrapper>}
     <SecondaryButtonText>{props.children}</SecondaryButtonText>
   </SecondaryButtonWrapper>
 );
@@ -78,4 +91,13 @@ export const ForwardButton = (props) => (
       <Icon name="arrow-forward" color={colors.white} size={24} />
     </ForwardButtonIcon>
   </PrimaryButtonWrapper>
+);
+
+export const BackwardButton = (props) => (
+  <SecondaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
+    <SecondaryButtonText>{props.children}</SecondaryButtonText>
+    <BackwardButtonIcon>
+      <Icon name="arrow-back" color={colors.textColor} size={24} />
+    </BackwardButtonIcon>
+  </SecondaryButtonWrapper>
 );

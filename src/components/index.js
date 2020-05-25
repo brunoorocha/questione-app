@@ -9,3 +9,4 @@ export * from './navigation-bar/NavigationBar';
 export * from './question-list-button/QuestionListButton';
 export * from './icon-buttons/IconButtons';
 export * from './vertical-spacer/VerticalSpacer';
+export * from './radio-button/RadioButton';

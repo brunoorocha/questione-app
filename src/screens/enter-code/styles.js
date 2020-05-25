@@ -20,6 +20,6 @@ export const CodeTextField = styled.TextInput`
 export const FooterView = styled.View`
   width: 100%;
   position: absolute;
-  bottom: ${(props) => (props.bottom ? `${props.bottom + 20}px` : '40px')};
+  bottom: ${(props) => (props.bottom ? `${props.bottom}px` : '40px')};
   left: 16px;
 `;

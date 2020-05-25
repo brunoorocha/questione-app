@@ -9,9 +9,17 @@ import {
   QuestionListButton,
   SecondaryButton,
   VerticalSpacer,
+  RadioButton,
+  ForwardButton,
+  BackwardButton,
+  HorizontalSpacer,
+  colors,
 } from '../../components';
-import { QuestionView } from './styles';
+import { QuestionView, ButtonsView } from './styles';
 import { routesNames } from '../../routes';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+Icon.loadFont();
 
 export default function Question({ navigation }) {
   const onPressAboutQuestionButton = () => {
@@ -36,13 +44,14 @@ export default function Question({ navigation }) {
       />
       <Content>
         <VerticalSpacer />
-        <SecondaryButton onPress={onPressAboutQuestionButton}>
+        <SecondaryButton
+          onPress={onPressAboutQuestionButton}
+          icon={<Icon name="info" size={20} color={colors.textColor} />}>
           Sobre a questão
         </SecondaryButton>
 
         <QuestionView>
           <Heading4>Texto base</Heading4>
-          <VerticalSpacer size={8} />
           <Paragraph>
             O planejamento dos testes deve ocorrer em diferentes níveis e em
             paralelo com o desenvolvimento do software. Com relação a esse
@@ -50,7 +59,29 @@ export default function Question({ navigation }) {
             descrevendo o paralelismo entre as atividades de desenvolvimento e
             teste de software.
           </Paragraph>
+
+          <VerticalSpacer size={16} />
+
+          <Heading4>Enunciado</Heading4>
+          <Paragraph>
+            As lacunas I e II são preenchidas, correta e respectivamente, por:
+          </Paragraph>
+
+          <VerticalSpacer size={16} />
+
+          <RadioButton
+            onPress={() => {}}
+            label="Teste de Aceitação e Teste de Unidade."
+          />
+          <RadioButton label="Teste de Unidade e Teste de Aceitação." />
+          <RadioButton label="Teste de Usabilidade, Teste de Confiabilidade e Testes Unitários." />
         </QuestionView>
+
+        <ButtonsView>
+          <BackwardButton>Anterior</BackwardButton>
+          <HorizontalSpacer />
+          <ForwardButton>Próxima</ForwardButton>
+        </ButtonsView>
       </Content>
     </SafeAreaView>
   );
