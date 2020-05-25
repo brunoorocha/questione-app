@@ -40,9 +40,11 @@ export const NavigationBar = (props) => {
 
   return (
     <NavigationBarView>
-      <ButtonItem>
-        {showBackButton && <BackButton onPress={onPressBackButton} />}
-      </ButtonItem>
+      {showBackButton ? (
+        <BackButton onPress={onPressBackButton} />
+      ) : (
+        <ButtonItem />
+      )}
       <CenterItem>{props.title}</CenterItem>
       <ButtonItem>{props.rightItem}</ButtonItem>
     </NavigationBarView>
