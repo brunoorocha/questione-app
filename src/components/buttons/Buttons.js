@@ -26,10 +26,16 @@ const PrimaryButtonWrapper = styled.TouchableOpacity`
 `;
 
 const ButtonText = styled.Text`
-  color: ${colors.white};
+  color: ${(props) => props.color ?? colors.textColor};
   font-family: 'Roboto-Bold';
   text-transform: uppercase;
   font-size: 16px;
+  flex: 1;
+  text-align: center;
+  margin-left: ${(props) =>
+    props.marginLeft ? `${props.marginLeft}px` : '0px'};
+  margin-right: ${(props) =>
+    props.marginRight ? `${props.marginRight}px` : '0px'};
 `;
 
 const SecondaryButtonWrapper = styled.TouchableOpacity`
@@ -48,17 +54,15 @@ const SecondaryButtonText = styled.Text`
   color: ${colors.textColor};
   font-family: 'Roboto-Bold';
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 12px;
 `;
 
 const ForwardButtonIcon = styled.View`
-  position: absolute;
-  right: 16px;
+  margin-right: 16px;
 `;
 
 const BackwardButtonIcon = styled.View`
-  position: absolute;
-  left: 16px;
+  margin-left: 16px;
 `;
 
 const IconWrapper = styled.View`
@@ -66,14 +70,14 @@ const IconWrapper = styled.View`
 `;
 
 export const LinkButton = (props) => (
-  <TouchableOpacity onPress={props.onPress} activeOpacity={0.6}>
+  <TouchableOpacity onPress={props.onPress} activeOpacity={0.7}>
     <Link textAlign={props.textAlign}>{props.children}</Link>
   </TouchableOpacity>
 );
 
 export const PrimaryButton = (props) => (
   <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
-    <ButtonText>{props.children}</ButtonText>
+    <ButtonText color={colors.white}>{props.children}</ButtonText>
   </PrimaryButtonWrapper>
 );
 
@@ -86,7 +90,9 @@ export const SecondaryButton = (props) => (
 
 export const ForwardButton = (props) => (
   <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
-    <ButtonText>{props.children}</ButtonText>
+    <ButtonText color={colors.white} marginLeft={16}>
+      {props.children}
+    </ButtonText>
 
     <ForwardButtonIcon>
       <Icon name="arrow-forward" color={colors.white} size={20} />
@@ -96,10 +102,10 @@ export const ForwardButton = (props) => (
 
 export const BackwardButton = (props) => (
   <SecondaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
-    <SecondaryButtonText>{props.children}</SecondaryButtonText>
-
     <BackwardButtonIcon>
       <Icon name="arrow-back" color={colors.textColor} size={20} />
     </BackwardButtonIcon>
+
+    <ButtonText marginRight={16}>{props.children}</ButtonText>
   </SecondaryButtonWrapper>
 );
