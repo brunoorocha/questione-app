@@ -89,7 +89,7 @@ export const ForwardButton = (props) => (
     <ButtonText>{props.children}</ButtonText>
 
     <ForwardButtonIcon>
-      <Icon name="arrow-forward" color={colors.white} size={24} />
+      <Icon name="arrow-forward" color={colors.white} size={20} />
     </ForwardButtonIcon>
   </PrimaryButtonWrapper>
 );
@@ -99,7 +99,7 @@ export const BackwardButton = (props) => (
     <SecondaryButtonText>{props.children}</SecondaryButtonText>
 
     <BackwardButtonIcon>
-      <Icon name="arrow-back" color={colors.textColor} size={24} />
+      <Icon name="arrow-back" color={colors.textColor} size={20} />
     </BackwardButtonIcon>
   </SecondaryButtonWrapper>
 );

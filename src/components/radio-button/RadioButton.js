@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { Paragraph } from '../typography/Typography';
 import { colors } from '../colors/Colors';
@@ -34,10 +35,35 @@ const RadioBullet = styled.View`
 `;
 
 export const RadioButton = ({ onPress, label, isSelected }) => {
+  const [bulletAnimation] = useState(new Animated.Value(0));
+  const AnimatedRadioBullet = Animated.createAnimatedComponent(RadioBullet);
+  const animatedRadioBulletStyle = {
+    transform: [
+      {
+        scale: bulletAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.8, 1.0],
+        }),
+      },
+    ],
+  };
+
+  useEffect(() => {
+    Animated.timing(bulletAnimation, {
+      toValue: isSelected ? 1 : 0,
+      duration: 100,
+      useNativeDriver: false,
+    }).start();
+  }, [isSelected, bulletAnimation]);
+
   return (
     <RadioButtonTouchableWrapper onPress={onPress}>
       <RadioButtonWrapper>
-        <Radio isChecked={isSelected}>{isSelected && <RadioBullet />}</Radio>
+        <Radio isChecked={isSelected}>
+          {isSelected && (
+            <AnimatedRadioBullet style={[animatedRadioBulletStyle]} />
+          )}
+        </Radio>
         <Paragraph>{label}</Paragraph>
       </RadioButtonWrapper>
     </RadioButtonTouchableWrapper>
