@@ -1,7 +1,40 @@
 import React from 'react';
-import { Content, BaseView, CloseButton } from '../../components';
+import {
+  BaseView,
+  CloseButton,
+  QuestionFlatList,
+  QuestionItemState,
+} from '../../components';
 
 export default function QuestionList({ navigation }) {
+  const questions = [
+    {
+      id: 1,
+      title: 'Questão 01',
+      state: QuestionItemState.answered,
+    },
+    {
+      id: 2,
+      title: 'Questão 02',
+      state: QuestionItemState.answered,
+    },
+    {
+      id: 3,
+      title: 'Questão 03',
+      state: QuestionItemState.notAnswered,
+    },
+    {
+      id: 4,
+      title: 'Questão 04',
+      state: QuestionItemState.notAnswered,
+    },
+    {
+      id: 5,
+      title: 'Questão 05',
+      state: QuestionItemState.notAnswered,
+    },
+  ];
+
   const onPressCloseButton = () => {
     navigation.goBack();
   };
@@ -11,7 +44,7 @@ export default function QuestionList({ navigation }) {
       title="Questões"
       navigationShowBackButton={false}
       navigationRightItem={<CloseButton onPress={onPressCloseButton} />}>
-      <Content />
+      <QuestionFlatList questions={questions} />
     </BaseView>
   );
 }

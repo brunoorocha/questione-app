@@ -8,3 +8,7 @@ export const ButtonsView = styled.View`
   flex-direction: row;
   margin-bottom: 40px;
 `;
+
+export const View = styled.View`
+  flex: 1;
+`;

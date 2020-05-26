@@ -12,17 +12,17 @@ const ButtonWrapper = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const MoreButton = (props) => {
+export const MoreButton = ({ onPress }) => {
   return (
-    <ButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
+    <ButtonWrapper onPress={onPress} activeOpacity={0.7}>
       <Icon name="more-vert" size={20} color={colors.textColor} />
     </ButtonWrapper>
   );
 };
 
-export const CloseButton = (props) => {
+export const CloseButton = ({ onPress }) => {
   return (
-    <ButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
+    <ButtonWrapper onPress={onPress} activeOpacity={0.7}>
       <Icon name="close" size={20} color={colors.textColor} />
     </ButtonWrapper>
   );

@@ -10,25 +10,9 @@ import EnterCode from './screens/enter-code/EnterCode';
 import Question from './screens/question/Question';
 import QuestionDetails from './screens/question-details/QuestionDetails';
 import QuestionList from './screens/question-list/QuestionList';
-import { colors, BackButton } from './components';
 
 const Stack = createStackNavigator();
 const EvaluationStack = createStackNavigator();
-
-const defaultOptions = {
-  headerStyle: { backgroundColor: colors.white },
-  headerTitleAlign: 'center',
-  headerTintColor: colors.primaryColor,
-  headerBackTitleVisible: false,
-  headerTitleStyle: {
-    fontSize: 12,
-    fontFamily: 'Roboto-Bold',
-    textTransform: 'uppercase',
-    color: colors.textColor,
-    fontWeight: 'bold',
-  },
-  headerBackImage: () => <BackButton />,
-};
 
 export const routesNames = {
   login: 'Login',
