@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Paragraph } from '../typography/Typography';
 import { colors } from '../colors/Colors';
@@ -33,21 +33,11 @@ const RadioBullet = styled.View`
   border-radius: 6px;
 `;
 
-export const RadioButton = ({ onPress, label }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const _onPress = () => {
-    if (onPress) {
-      onPress();
-    }
-
-    setIsChecked(!isChecked);
-  };
-
+export const RadioButton = ({ onPress, label, isSelected }) => {
   return (
-    <RadioButtonTouchableWrapper onPress={_onPress}>
+    <RadioButtonTouchableWrapper onPress={onPress}>
       <RadioButtonWrapper>
-        <Radio isChecked={isChecked}>{isChecked && <RadioBullet />}</Radio>
+        <Radio isChecked={isSelected}>{isSelected && <RadioBullet />}</Radio>
         <Paragraph>{label}</Paragraph>
       </RadioButtonWrapper>
     </RadioButtonTouchableWrapper>

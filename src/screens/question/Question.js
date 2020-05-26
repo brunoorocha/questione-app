@@ -9,7 +9,7 @@ import {
   QuestionListButton,
   SecondaryButton,
   VerticalSpacer,
-  RadioButton,
+  RadioGroup,
   ForwardButton,
   BackwardButton,
   HorizontalSpacer,
@@ -22,6 +22,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 Icon.loadFont();
 
 export default function Question({ navigation }) {
+  const questionOptions = [
+    'Teste de Aceitação e Teste de Unidade.',
+    'Teste de Unidade e Teste de Aceitação.',
+    'Teste de Usabilidade, Teste de Confiabilidade e Testes Unitários.',
+  ];
+
   const onPressAboutQuestionButton = () => {
     navigation.push(routesNames.questionDetails);
   };
@@ -69,12 +75,7 @@ export default function Question({ navigation }) {
 
           <VerticalSpacer size={16} />
 
-          <RadioButton
-            onPress={() => {}}
-            label="Teste de Aceitação e Teste de Unidade."
-          />
-          <RadioButton label="Teste de Unidade e Teste de Aceitação." />
-          <RadioButton label="Teste de Usabilidade, Teste de Confiabilidade e Testes Unitários." />
+          <RadioGroup options={questionOptions} />
         </QuestionView>
 
         <ButtonsView>
