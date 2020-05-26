@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Content,
-  SafeAreaView,
-  NavigationBar,
-  CloseButton,
-  Uppercased,
-} from '../../components';
+import { Content, BaseView, CloseButton } from '../../components';
 
 export default function QuestionList({ navigation }) {
   const onPressCloseButton = () => {
@@ -13,13 +7,11 @@ export default function QuestionList({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
-      <NavigationBar
-        showBackButton={false}
-        rightItem={<CloseButton onPress={onPressCloseButton} />}
-        title={<Uppercased>Questões</Uppercased>}
-      />
+    <BaseView
+      title="Questões"
+      navigationShowBackButton={false}
+      navigationRightItem={<CloseButton onPress={onPressCloseButton} />}>
       <Content />
-    </SafeAreaView>
+    </BaseView>
   );
 }

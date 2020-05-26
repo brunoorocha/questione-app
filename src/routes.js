@@ -81,23 +81,17 @@ export default function AppNavigation() {
         <Stack.Screen
           name={routesNames.forgotPassword}
           component={ForgotPassword}
-          options={{ ...defaultOptions, title: 'Esqueci minha senha' }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={routesNames.signUp}
           component={SignUp}
-          options={{
-            ...defaultOptions,
-            title: 'Criar conta',
-          }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={routesNames.home}
           component={Home}
-          options={{
-            ...defaultOptions,
-            headerShown: false,
-          }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={routesNames.evaluation}

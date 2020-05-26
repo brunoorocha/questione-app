@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, Keyboard } from 'react-native';
-import {
-  Heading3,
-  Uppercased,
-  ForwardButton,
-  NavigationBar,
-  SafeAreaView,
-  colors,
-} from '../../components';
+import { Keyboard } from 'react-native';
+import { Heading3, ForwardButton, BaseView } from '../../components';
 import { EnterCodeView, CodeTextField, FooterView, Content } from './styles';
 import { routesNames } from '../../routes';
 
@@ -40,13 +33,7 @@ export default function EnterCode({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
-      <NavigationBar
-        navigation={navigation}
-        title={<Uppercased>Realizar avaliação</Uppercased>}
-      />
-
+    <BaseView title="Realizar Avaliação" navigation={navigation}>
       <Content>
         <EnterCodeView>
           <Heading3>Digite o código da avaliação:</Heading3>
@@ -62,6 +49,6 @@ export default function EnterCode({ navigation }) {
           <ForwardButton onPress={onPressParticipate}>Participar</ForwardButton>
         </FooterView>
       </Content>
-    </SafeAreaView>
+    </BaseView>
   );
 }

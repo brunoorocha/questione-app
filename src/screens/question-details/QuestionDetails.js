@@ -4,11 +4,9 @@ import {
   Paragraph,
   Heading2,
   Heading4,
-  SafeAreaView,
-  NavigationBar,
+  BaseView,
   CloseButton,
   VerticalSpacer,
-  Uppercased,
 } from '../../components';
 import { QuestionDetailsView } from './styles';
 
@@ -18,12 +16,10 @@ export default function QuestionDetails({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
-      <NavigationBar
-        showBackButton={false}
-        rightItem={<CloseButton onPress={onPressCloseButton} />}
-        title={<Uppercased>Sobre a Questão</Uppercased>}
-      />
+    <BaseView
+      title="Sobre a questão"
+      navigationShowBackButton={false}
+      navigationRightItem={<CloseButton onPress={onPressCloseButton} />}>
       <Content>
         <QuestionDetailsView>
           <Heading2>Questão - 000722</Heading2>
@@ -40,6 +36,6 @@ export default function QuestionDetails({ navigation }) {
           <VerticalSpacer size={16} />
         </QuestionDetailsView>
       </Content>
-    </SafeAreaView>
+    </BaseView>
   );
 }

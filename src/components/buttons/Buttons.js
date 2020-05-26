@@ -87,6 +87,7 @@ export const SecondaryButton = (props) => (
 export const ForwardButton = (props) => (
   <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
     <ButtonText>{props.children}</ButtonText>
+
     <ForwardButtonIcon>
       <Icon name="arrow-forward" color={colors.white} size={24} />
     </ForwardButtonIcon>
@@ -96,6 +97,7 @@ export const ForwardButton = (props) => (
 export const BackwardButton = (props) => (
   <SecondaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
     <SecondaryButtonText>{props.children}</SecondaryButtonText>
+
     <BackwardButtonIcon>
       <Icon name="arrow-back" color={colors.textColor} size={24} />
     </BackwardButtonIcon>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { BackButton } from '../back-button/BackButton';
 import { colors } from '../colors/Colors';
+import { Uppercased } from '../typography/Typography';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 Icon.loadFont();
@@ -30,23 +31,32 @@ const ButtonItem = styled.View`
   align-items: center;
 `;
 
-export const NavigationBar = (props) => {
-  const showBackButton =
-    props.showBackButton !== undefined ? props.showBackButton : true;
+export const NavigationBar = ({
+  showBackButton,
+  navigation,
+  title,
+  rightItem,
+}) => {
+  const _showBackButton = showBackButton !== undefined ? showBackButton : true;
+  const _isTitleString = typeof title === 'string';
 
   const onPressBackButton = () => {
-    props.navigation.goBack();
+    navigation.goBack();
   };
 
   return (
     <NavigationBarView>
-      {showBackButton ? (
-        <BackButton onPress={onPressBackButton} />
+      {_showBackButton ? (
+        <ButtonItem>
+          <BackButton onPress={onPressBackButton} />
+        </ButtonItem>
       ) : (
         <ButtonItem />
       )}
-      <CenterItem>{props.title}</CenterItem>
-      <ButtonItem>{props.rightItem}</ButtonItem>
+      <CenterItem>
+        {_isTitleString ? <Uppercased>{title}</Uppercased> : title}
+      </CenterItem>
+      <ButtonItem>{rightItem}</ButtonItem>
     </NavigationBarView>
   );
 };

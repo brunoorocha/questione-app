@@ -8,6 +8,7 @@ export * from './back-button/BackButton';
 export * from './navigation-bar/NavigationBar';
 export * from './question-list-button/QuestionListButton';
 export * from './icon-buttons/IconButtons';
-export * from './vertical-spacer/VerticalSpacer';
+export * from './spacer/Spacer';
 export * from './radio-button/RadioButton';
 export * from './radio-button/RadioGroup';
+export * from './base-view/BaseView';
