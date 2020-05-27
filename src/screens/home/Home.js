@@ -18,6 +18,10 @@ export default function Home({ navigation }) {
     navigation.push(routesNames.evaluation);
   };
 
+  const onPressAnsweredTests = () => {
+    navigation.push(routesNames.answeredTests);
+  };
+
   return (
     <View>
       <StatusBar
@@ -33,6 +37,7 @@ export default function Home({ navigation }) {
           title="AVALIAÇÕES RESPONDIDAS"
           icon={<Icon name="assessment" color={colors.white} size={20} />}
           color={colors.green}
+          onPress={onPressAnsweredTests}
         />
         <HomeCard
           title="REALIZAR AVALIAÇÃO"

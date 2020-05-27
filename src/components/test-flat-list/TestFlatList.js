@@ -1,0 +1,24 @@
+import React from 'react';
+import { FlatList } from 'react-native';
+import { TestCard } from './TestCard';
+
+export const TestFlatList = ({ tests }) => {
+  const listStyle = {
+    padding: 16,
+  };
+
+  return (
+    <FlatList
+      data={tests}
+      keyExtractor={(item) => `${item.id}`}
+      renderItem={({ item }) => (
+        <TestCard
+          description={item.description}
+          date={item.date}
+          isFinished={item.isFinished}
+        />
+      )}
+      style={listStyle}
+    />
+  );
+};

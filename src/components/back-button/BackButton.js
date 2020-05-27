@@ -8,7 +8,7 @@ Icon.loadFont();
 export const BackButton = (props) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={props.onPress}>
-      <Icon name="arrow-back" color={colors.primaryColor} size={24} />
+      <Icon name="arrow-back" color={colors.primaryColor} size={20} />
     </TouchableOpacity>
   );
 };

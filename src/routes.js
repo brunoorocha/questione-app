@@ -10,6 +10,7 @@ import EnterCode from './screens/enter-code/EnterCode';
 import Question from './screens/question/Question';
 import QuestionDetails from './screens/question-details/QuestionDetails';
 import QuestionList from './screens/question-list/QuestionList';
+import AnsweredTests from './screens/answered-tests/AnsweredTests';
 
 const Stack = createStackNavigator();
 const EvaluationStack = createStackNavigator();
@@ -24,6 +25,7 @@ export const routesNames = {
   question: 'Question',
   questionDetails: 'QuestionDetails',
   questionList: 'QuestionList',
+  answeredTests: 'AnsweredTests',
 };
 
 function EvaluationNavigation() {
@@ -80,6 +82,11 @@ export default function AppNavigation() {
         <Stack.Screen
           name={routesNames.evaluation}
           component={EvaluationNavigation}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={routesNames.answeredTests}
+          component={AnsweredTests}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
