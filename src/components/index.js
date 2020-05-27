@@ -16,3 +16,4 @@ export * from './base-view/BaseView';
 export * from './question-flat-list/QuestionListItem';
 export * from './question-flat-list/QuestionFlatList';
 export * from './action-sheet/ActionSheet';
+export * from './rating/Rating';

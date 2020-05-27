@@ -7,8 +7,11 @@ import {
   BaseView,
   CloseButton,
   VerticalSpacer,
+  HorizontalSpacer,
+  Label,
+  Rating,
 } from '../../components';
-import { QuestionDetailsView } from './styles';
+import { QuestionDetailsView, RatingView } from './styles';
 
 export default function QuestionDetails({ navigation }) {
   const onPressCloseButton = () => {
@@ -23,6 +26,11 @@ export default function QuestionDetails({ navigation }) {
       <Content>
         <QuestionDetailsView>
           <Heading2>Questão - 000722</Heading2>
+          <RatingView>
+            <Rating />
+            <HorizontalSpacer size={8} />
+            <Label>Classificação</Label>
+          </RatingView>
 
           <Heading4>Área de origem:</Heading4>
           <Paragraph>Bacharelado em Sistemas de Informação</Paragraph>

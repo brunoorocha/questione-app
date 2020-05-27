@@ -23,7 +23,7 @@ const ActionSheetList = styled.View`
 `;
 
 const ActionSheetItemWrapper = styled.TouchableHighlight`
-  padding: 16px;
+  padding: 20px 0px;
 `;
 
 const ActionSheetItemTitle = styled.Text`
