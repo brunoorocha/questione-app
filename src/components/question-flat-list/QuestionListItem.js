@@ -37,7 +37,8 @@ export const QuestionItemState = {
   wrong: 'wrong',
 };
 
-export const QuestionListItem = ({ title, state }) => {
+export const QuestionListItem = ({ title, state, onPress, isSelectable }) => {
+  const _isSelectable = isSelectable === undefined ? true : isSelectable;
   const _state = state ?? QuestionItemState.notAnswered;
 
   const _stateCheckmark = {
@@ -65,7 +66,9 @@ export const QuestionListItem = ({ title, state }) => {
         {_stateCheckmark[_state].icon}
       </StateCheckmark>
       <QuestionTitle>{title}</QuestionTitle>
-      <Icon name="keyboard-arrow-right" size={24} color={colors.textColor} />
+      {_isSelectable && (
+        <Icon name="keyboard-arrow-right" size={24} color={colors.textColor} />
+      )}
     </QuestionListItemWrapper>
   );
 };

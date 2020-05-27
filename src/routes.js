@@ -12,6 +12,7 @@ import QuestionDetails from './screens/question-details/QuestionDetails';
 import QuestionList from './screens/question-list/QuestionList';
 import AnsweredTests from './screens/answered-tests/AnsweredTests';
 import TestDetails from './screens/test-details/TestDetails';
+import Answers from './screens/answers/Answers';
 
 const Stack = createStackNavigator();
 const EvaluationStack = createStackNavigator();
@@ -28,6 +29,7 @@ export const routesNames = {
   questionList: 'QuestionList',
   answeredTests: 'AnsweredTests',
   testDetails: 'TestDetails',
+  answers: 'Answers',
 };
 
 function EvaluationNavigation() {
@@ -94,6 +96,11 @@ export default function AppNavigation() {
         <Stack.Screen
           name={routesNames.testDetails}
           component={TestDetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={routesNames.answers}
+          component={Answers}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -20,3 +20,4 @@ export * from './rating/Rating';
 export * from './test-flat-list/TestFlatList';
 export * from './chips/Chips';
 export * from './number-card/NumberCard';
+export * from './search-field/SeachField';

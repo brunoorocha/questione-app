@@ -10,7 +10,8 @@ export const TestFlatList = ({ tests, onSelect }) => {
   };
 
   const listStyle = {
-    padding: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
   };
 
   return (

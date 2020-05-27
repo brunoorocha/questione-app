@@ -1,5 +1,11 @@
 import React from 'react';
-import { BaseView, SafeAreaView, TestFlatList } from '../../components';
+import {
+  BaseView,
+  SafeAreaView,
+  TestFlatList,
+  SearchField,
+} from '../../components';
+import { SearchView } from './styles';
 import { routesNames } from '../../routes';
 
 export default function AnsweredTests({ navigation }) {
@@ -26,6 +32,10 @@ export default function AnsweredTests({ navigation }) {
   return (
     <BaseView title="Avaliações respondidas" navigation={navigation}>
       <SafeAreaView>
+        <SearchView>
+          <SearchField placeholder="Pesquisar avaliação" />
+        </SearchView>
+
         <TestFlatList tests={answeredTests} onSelect={onSelectTest} />
       </SafeAreaView>
     </BaseView>

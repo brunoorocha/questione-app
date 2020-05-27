@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../colors/Colors';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+Icon.loadFont();
 
 const TextFieldView = styled.View`
   height: 48px;

@@ -10,18 +10,24 @@ import {
   VerticalSpacer,
   SecondaryButton,
   NumberCard,
+  Content,
   colors,
   HorizontalSpacer,
 } from '../../components';
-import { HeaderView, FooterView, ResultsView, ContentView } from './styles';
+import { HeaderView, FooterView, ResultsView } from './styles';
+import { routesNames } from '../../routes';
 
 Icon.loadFont();
 
 export default function TestDetails({ navigation }) {
+  const onPressSeeAnswersButton = () => {
+    navigation.push(routesNames.answers);
+  };
+
   return (
     <BaseView title="Detalhes da Avaliação" navigation={navigation}>
       <SafeAreaView>
-        <ContentView>
+        <Content>
           <HeaderView>
             <Chip
               title="Finalizada"
@@ -47,6 +53,7 @@ export default function TestDetails({ navigation }) {
 
           <FooterView>
             <SecondaryButton
+              onPress={onPressSeeAnswersButton}
               icon={
                 <Icon
                   name="format-list-bulleted"
@@ -57,7 +64,7 @@ export default function TestDetails({ navigation }) {
               Visualizar gabarito
             </SecondaryButton>
           </FooterView>
-        </ContentView>
+        </Content>
       </SafeAreaView>
     </BaseView>
   );
