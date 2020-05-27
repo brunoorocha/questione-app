@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Easing, Dimensions, SafeAreaView } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Dimensions,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../colors/Colors';
 
@@ -12,10 +18,8 @@ const ActionSheetOverlay = styled.View`
 `;
 
 const ActionSheetList = styled.View`
-  background-color: ${colors.white};
-  padding: 16px 0;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  background-color: transparent;
+  padding: 0px 16px;
 `;
 
 const ActionSheetItemWrapper = styled.TouchableHighlight`
@@ -28,6 +32,13 @@ const ActionSheetItemTitle = styled.Text`
   font-family: 'Roboto-Bold';
   color: ${(props) => props.color ?? colors.textColor};
   text-transform: uppercase;
+`;
+
+const ActionGroup = styled.View`
+  background-color: ${colors.white};
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
 `;
 
 export const ActionSheetItem = ({ title, onPress, type }) => {
@@ -93,13 +104,18 @@ export const ActionSheet = ({ children, isOpen, onPressCancel }) => {
   }, [isOpen, animation]);
 
   return (
-    <AnimatedActionSheetOverlay style={[animatedStyles.overlay]}>
-      <AnimatedActionSheetList style={[animatedStyles.list]}>
-        <SafeAreaView style={{ backgroundColor: colors.white }}>
-          {children}
-          <ActionSheetItem title="Cancelar" onPress={onPressCancel} />
-        </SafeAreaView>
-      </AnimatedActionSheetList>
-    </AnimatedActionSheetOverlay>
+    <TouchableWithoutFeedback onPress={onPressCancel}>
+      <AnimatedActionSheetOverlay style={[animatedStyles.overlay]}>
+        <AnimatedActionSheetList style={[animatedStyles.list]}>
+          <SafeAreaView>
+            <ActionGroup>{children}</ActionGroup>
+
+            <ActionGroup>
+              <ActionSheetItem title="Cancelar" onPress={onPressCancel} />
+            </ActionGroup>
+          </SafeAreaView>
+        </AnimatedActionSheetList>
+      </AnimatedActionSheetOverlay>
+    </TouchableWithoutFeedback>
   );
 };
