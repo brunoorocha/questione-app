@@ -1,5 +1,6 @@
 import React from 'react';
 import { BaseView, SafeAreaView, TestFlatList } from '../../components';
+import { routesNames } from '../../routes';
 
 export default function AnsweredTests({ navigation }) {
   const answeredTests = [
@@ -18,10 +19,14 @@ export default function AnsweredTests({ navigation }) {
     },
   ];
 
+  const onSelectTest = (test) => {
+    navigation.push(routesNames.testDetails);
+  };
+
   return (
     <BaseView title="Avaliações respondidas" navigation={navigation}>
       <SafeAreaView>
-        <TestFlatList tests={answeredTests} />
+        <TestFlatList tests={answeredTests} onSelect={onSelectTest} />
       </SafeAreaView>
     </BaseView>
   );

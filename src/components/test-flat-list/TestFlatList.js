@@ -2,7 +2,13 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { TestCard } from './TestCard';
 
-export const TestFlatList = ({ tests }) => {
+export const TestFlatList = ({ tests, onSelect }) => {
+  const _onSelect = (test) => {
+    if (onSelect) {
+      onSelect(test);
+    }
+  };
+
   const listStyle = {
     padding: 16,
   };
@@ -16,6 +22,9 @@ export const TestFlatList = ({ tests }) => {
           description={item.description}
           date={item.date}
           isFinished={item.isFinished}
+          onPress={() => {
+            _onSelect(item);
+          }}
         />
       )}
       style={listStyle}

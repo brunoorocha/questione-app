@@ -81,10 +81,10 @@ export const PrimaryButton = (props) => (
   </PrimaryButtonWrapper>
 );
 
-export const SecondaryButton = (props) => (
-  <SecondaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
-    {props.icon && <IconWrapper>{props.icon}</IconWrapper>}
-    <SecondaryButtonText>{props.children}</SecondaryButtonText>
+export const SecondaryButton = ({ children, onPress, icon }) => (
+  <SecondaryButtonWrapper onPress={onPress} activeOpacity={0.7}>
+    {icon && <IconWrapper>{icon}</IconWrapper>}
+    <SecondaryButtonText>{children}</SecondaryButtonText>
   </SecondaryButtonWrapper>
 );
 

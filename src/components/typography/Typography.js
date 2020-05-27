@@ -10,6 +10,7 @@ export const Heading1 = styled.Text`
 
 export const Heading2 = styled.Text`
   font-size: 24px;
+  line-height: 36px;
   font-family: 'Roboto-Bold';
   color: ${(props) => props.color ?? colors.textColor};
   margin-bottom: 16px;

@@ -26,9 +26,9 @@ const TestDateText = styled.Text`
   color: ${colors.textColor};
 `;
 
-export const TestCard = ({ description, date, isFinished }) => {
+export const TestCard = ({ description, date, isFinished, onPress }) => {
   return (
-    <TestCardView activeOpacity={0.7}>
+    <TestCardView activeOpacity={0.7} onPress={onPress}>
       {isFinished ? (
         <Chip
           title="Finalizada"

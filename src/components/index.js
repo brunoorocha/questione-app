@@ -18,3 +18,5 @@ export * from './question-flat-list/QuestionFlatList';
 export * from './action-sheet/ActionSheet';
 export * from './rating/Rating';
 export * from './test-flat-list/TestFlatList';
+export * from './chips/Chips';
+export * from './number-card/NumberCard';
