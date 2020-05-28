@@ -14,7 +14,7 @@ import { routesNames } from '../../routes/routes-names';
 import AuthContext from '../../contexts/auth';
 
 export default function SignIn({ navigation }) {
-  const { user, signIn } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const onPressForgotMyPassword = () => {
     navigation.push(routesNames.forgotPassword);
@@ -27,8 +27,6 @@ export default function SignIn({ navigation }) {
   const onPressSignIn = () => {
     signIn({ email: '', password: '' });
   };
-
-  console.log(user);
 
   return (
     <SafeAreaView>

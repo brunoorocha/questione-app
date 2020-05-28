@@ -3,20 +3,21 @@ import { useAuthService } from '../services/auth.service';
 
 export const AuthProvider = ({ children }) => {
   const authService = useAuthService();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(undefined);
 
   const signIn = async ({ email, password }) => {
     const response = await authService.signIn({ email, password });
     setUser(response[0]);
   };
 
-  // const signUp = async ({ name, cpf, email, password }) => {
-  //   const response = await authService.signUp({ name, cpf, email, password });
-  //   setUser(response[0]);
-  // };
+  const signOut = () => {
+    authService.signOut();
+    setUser(undefined);
+  };
 
   return (
-    <AuthContext.Provider value={{ isUserAuthenticated: !!user, user, signIn }}>
+    <AuthContext.Provider
+      value={{ isUserAuthenticated: !!user, user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
