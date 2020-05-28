@@ -9,7 +9,7 @@ import {
 } from '../../components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { HeaderView } from './styles';
-import { routesNames } from '../../routes';
+import { routesNames } from '../../routes/routes-names';
 
 Icon.loadFont();
 

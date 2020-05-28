@@ -17,7 +17,7 @@ import {
   colors,
 } from '../../components';
 import { QuestionView, ButtonsView, View } from './styles';
-import { routesNames } from '../../routes';
+import { routesNames } from '../../routes/routes-names';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 Icon.loadFont();
