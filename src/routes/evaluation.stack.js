@@ -11,7 +11,7 @@ const EvaluationStack = createStackNavigator();
 
 export default function EvaluationRoutes() {
   return (
-    <EvaluationStack.Navigator>
+    <EvaluationStack.Navigator mode="modal">
       <EvaluationStack.Screen
         name={routesNames.enterCode}
         component={EnterCode}
@@ -20,17 +20,17 @@ export default function EvaluationRoutes() {
       <EvaluationStack.Screen
         name={routesNames.question}
         component={Question}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <EvaluationStack.Screen
         name={routesNames.questionDetails}
         component={QuestionDetails}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <EvaluationStack.Screen
         name={routesNames.questionList}
         component={QuestionList}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
     </EvaluationStack.Navigator>
   );

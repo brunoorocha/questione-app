@@ -5,6 +5,7 @@ import Home from '../screens/home/Home';
 import AnsweredTests from '../screens/answered-tests/AnsweredTests';
 import TestDetails from '../screens/test-details/TestDetails';
 import Answers from '../screens/answers/Answers';
+import EvaluationStack from './evaluation.stack';
 import { routesNames } from './routes-names';
 
 const AppStack = createStackNavigator();
@@ -30,6 +31,11 @@ export default function AppRoutes() {
       <AppStack.Screen
         name={routesNames.answers}
         component={Answers}
+        options={{ headerShown: false }}
+      />
+      <AppStack.Screen
+        name={routesNames.evaluation}
+        component={EvaluationStack}
         options={{ headerShown: false }}
       />
     </AppStack.Navigator>
