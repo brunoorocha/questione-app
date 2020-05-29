@@ -12,18 +12,18 @@ const ButtonWrapper = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const MoreButton = ({ onPress }) => {
+export const MoreButton = ({ onPress, color }) => {
   return (
     <ButtonWrapper onPress={onPress} activeOpacity={0.7}>
-      <Icon name="more-vert" size={20} color={colors.textColor} />
+      <Icon name="more-vert" size={20} color={color ?? colors.textColor} />
     </ButtonWrapper>
   );
 };
 
-export const CloseButton = ({ onPress }) => {
+export const CloseButton = ({ onPress, color }) => {
   return (
     <ButtonWrapper onPress={onPress} activeOpacity={0.7}>
-      <Icon name="close" size={20} color={colors.textColor} />
+      <Icon name="close" size={20} color={color ?? colors.textColor} />
     </ButtonWrapper>
   );
 };

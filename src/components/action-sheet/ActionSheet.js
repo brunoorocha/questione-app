@@ -10,7 +10,7 @@ import styled from 'styled-components/native';
 import { colors } from '../colors/Colors';
 
 const ActionSheetOverlay = styled.View`
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   width: 100%;
   height: 100%;

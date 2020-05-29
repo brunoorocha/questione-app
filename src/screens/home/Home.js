@@ -1,21 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { StatusBar } from 'react-native';
 import {
   Heading1,
   Heading3,
   HomeCardMenu,
   HomeCard,
-  SecondaryButton,
+  MoreButton,
+  ActionSheet,
+  ActionSheetItem,
   colors,
 } from '../../components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { HeaderView, ContentView, FooterView } from './styles';
+import {
+  HeaderView,
+  ContentView,
+  MoreButtonView,
+  GreetingView,
+} from './styles';
 import { routesNames } from '../../routes/routes-names';
 import AuthContext from '../../contexts/auth';
 
 Icon.loadFont();
 
 export default function Home({ navigation }) {
+  const [isShowingActionSheet, setIsShowingActionSheet] = useState(false);
   const { user, signOut } = useContext(AuthContext);
 
   const formattedUserName = (name) => {
@@ -31,6 +39,14 @@ export default function Home({ navigation }) {
     navigation.push(routesNames.answeredTests);
   };
 
+  const onPressMoreButton = () => {
+    setIsShowingActionSheet(true);
+  };
+
+  const onPressActionSheetCancellButton = () => {
+    setIsShowingActionSheet(false);
+  };
+
   const onPressSignOutButton = () => {
     signOut();
   };
@@ -42,10 +58,16 @@ export default function Home({ navigation }) {
         backgroundColor={colors.primaryColor}
       />
       <HeaderView>
-        <Heading3 color={colors.white}>Olá,</Heading3>
-        <Heading1 color={colors.white}>
-          {user.name ? formattedUserName(user.name) : ''}
-        </Heading1>
+        <MoreButtonView>
+          <MoreButton onPress={onPressMoreButton} color={colors.white} />
+        </MoreButtonView>
+
+        <GreetingView>
+          <Heading3 color={colors.white}>Olá,</Heading3>
+          <Heading1 color={colors.white}>
+            {user.name ? formattedUserName(user.name) : ''}
+          </Heading1>
+        </GreetingView>
       </HeaderView>
       <HomeCardMenu>
         <HomeCard
@@ -62,11 +84,15 @@ export default function Home({ navigation }) {
         />
       </HomeCardMenu>
 
-      <FooterView>
-        <SecondaryButton onPress={onPressSignOutButton}>
-          Sair da aplicação
-        </SecondaryButton>
-      </FooterView>
+      <ActionSheet
+        isOpen={isShowingActionSheet}
+        onPressCancel={onPressActionSheetCancellButton}>
+        <ActionSheetItem
+          title="Fazer logout"
+          type="destructive"
+          onPress={onPressSignOutButton}
+        />
+      </ActionSheet>
     </ContentView>
   );
 }
