@@ -36,7 +36,13 @@ const TextInput = styled.TextInput`
   margin-top: -14px;
 `;
 
-export const TextField = (props) => {
+export const TextField = ({
+  label,
+  keyboardType,
+  secureTextEntry,
+  marginBottom,
+  onChangeText,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState('');
@@ -59,20 +65,24 @@ export const TextField = (props) => {
     textInputRef.focus();
   };
 
-  const onChangeText = (text) => {
+  const _onChangeText = (text) => {
     setValue(text);
+
+    if (onChangeText) {
+      onChangeText(text);
+    }
   };
 
   return (
     <TouchableWithoutFeedback onPress={didTapOnTextFieldView}>
-      <TextFieldView isActive={isFocused} {...props}>
-        <FieldLabel isActive={isActive}>{props.label ?? ''}</FieldLabel>
+      <TextFieldView isActive={isFocused} marginBottom={marginBottom}>
+        <FieldLabel isActive={isActive}>{label ?? ''}</FieldLabel>
         <TextInput
-          keyboardType={props.keyboardType ?? 'default'}
-          secureTextEntry={props.secureTextEntry}
+          keyboardType={keyboardType ?? 'default'}
+          secureTextEntry={secureTextEntry}
           onFocus={onFocus}
           onBlur={onBlur}
-          onChangeText={onChangeText}
+          onChangeText={_onChangeText}
           value={value}
           ref={(input) => {
             textInputRef = input;

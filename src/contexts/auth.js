@@ -6,8 +6,12 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
 
   const signIn = async ({ email, password }) => {
-    const response = await authService.signIn({ email, password });
-    setUser(response[0]);
+    try {
+      const response = await authService.signIn({ email, password });
+      setUser(response[0]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const signOut = () => {

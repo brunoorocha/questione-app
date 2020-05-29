@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Heading2,
   Content,
@@ -14,6 +14,9 @@ import { routesNames } from '../../routes/routesNames';
 import AuthContext from '../../contexts/auth';
 
 export default function SignIn({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const { signIn } = useContext(AuthContext);
 
   const onPressForgotMyPassword = () => {
@@ -25,7 +28,7 @@ export default function SignIn({ navigation }) {
   };
 
   const onPressSignIn = () => {
-    signIn({ email: '', password: '' });
+    signIn({ email, password });
   };
 
   return (
@@ -40,8 +43,13 @@ export default function SignIn({ navigation }) {
             keyboardType="email-address"
             label="Email"
             marginBottom={16}
+            onChangeText={setEmail}
           />
-          <TextField secureTextEntry={true} label="Senha" />
+          <TextField
+            secureTextEntry={true}
+            label="Senha"
+            onChangeText={setPassword}
+          />
           <LinkButton onPress={onPressForgotMyPassword}>
             Esqueci minha senha
           </LinkButton>
