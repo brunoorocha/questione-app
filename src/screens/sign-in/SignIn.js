@@ -10,7 +10,7 @@ import {
 } from '../../components';
 import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
-import { routesNames } from '../../routes/routes-names';
+import { routesNames } from '../../routes/routesNames';
 import AuthContext from '../../contexts/auth';
 
 export default function SignIn({ navigation }) {

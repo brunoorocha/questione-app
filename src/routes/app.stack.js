@@ -6,7 +6,7 @@ import AnsweredTests from '../screens/answered-tests/AnsweredTests';
 import TestDetails from '../screens/test-details/TestDetails';
 import Answers from '../screens/answers/Answers';
 import EvaluationStack from './evaluation.stack';
-import { routesNames } from './routes-names';
+import { routesNames } from './routesNames';
 
 const AppStack = createStackNavigator();
 

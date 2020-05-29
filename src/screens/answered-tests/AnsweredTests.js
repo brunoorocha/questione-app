@@ -6,7 +6,7 @@ import {
   SearchField,
 } from '../../components';
 import { SearchView } from './styles';
-import { routesNames } from '../../routes/routes-names';
+import { routesNames } from '../../routes/routesNames';
 
 export default function AnsweredTests({ navigation }) {
   const answeredTests = [

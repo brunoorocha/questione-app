@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { Heading3, ForwardButton, BaseView } from '../../components';
 import { EnterCodeView, CodeTextField, FooterView, Content } from './styles';
-import { routesNames } from '../../routes/routes-names';
+import { routesNames } from '../../routes/routesNames';
 
 export default function EnterCode({ navigation }) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);

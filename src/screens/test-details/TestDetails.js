@@ -15,7 +15,7 @@ import {
   HorizontalSpacer,
 } from '../../components';
 import { HeaderView, FooterView, ResultsView } from './styles';
-import { routesNames } from '../../routes/routes-names';
+import { routesNames } from '../../routes/routesNames';
 
 Icon.loadFont();
 

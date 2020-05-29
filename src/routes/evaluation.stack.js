@@ -5,7 +5,7 @@ import EnterCode from '../screens/enter-code/EnterCode';
 import Question from '../screens/question/Question';
 import QuestionDetails from '../screens/question-details/QuestionDetails';
 import QuestionList from '../screens/question-list/QuestionList';
-import { routesNames } from './routes-names';
+import { routesNames } from './routesNames';
 
 const EvaluationStack = createStackNavigator();
 

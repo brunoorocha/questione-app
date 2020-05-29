@@ -17,7 +17,7 @@ import {
   MoreButtonView,
   GreetingView,
 } from './styles';
-import { routesNames } from '../../routes/routes-names';
+import { routesNames } from '../../routes/routesNames';
 import AuthContext from '../../contexts/auth';
 
 Icon.loadFont();
