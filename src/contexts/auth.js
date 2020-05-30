@@ -4,13 +4,17 @@ import { useAuthService } from '../services/auth.service';
 export const AuthProvider = ({ children }) => {
   const authService = useAuthService();
   const [user, setUser] = useState(undefined);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const signIn = async ({ email, password }) => {
     try {
+      setIsAuthenticating(true);
       const response = await authService.signIn({ email, password });
       setUser(response[0]);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsAuthenticating(false);
     }
   };
 
@@ -21,7 +25,13 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isUserAuthenticated: !!user, user, signIn, signOut }}>
+      value={{
+        isUserAuthenticated: !!user,
+        user,
+        isAuthenticating,
+        signIn,
+        signOut,
+      }}>
       {children}
     </AuthContext.Provider>
   );

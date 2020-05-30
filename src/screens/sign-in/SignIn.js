@@ -7,6 +7,7 @@ import {
   TextField,
   Label,
   SafeAreaView,
+  FullscreenActivityIndicator,
 } from '../../components';
 import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
@@ -17,7 +18,7 @@ export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signIn } = useContext(AuthContext);
+  const { signIn, isAuthenticating } = useContext(AuthContext);
 
   const onPressForgotMyPassword = () => {
     navigation.push(routesNames.forgotPassword);
@@ -63,6 +64,8 @@ export default function SignIn({ navigation }) {
           </LinkButton>
         </FooterView>
       </Content>
+
+      <FullscreenActivityIndicator isVisible={isAuthenticating} />
     </SafeAreaView>
   );
 }
