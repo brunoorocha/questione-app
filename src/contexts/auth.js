@@ -1,17 +1,36 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useAsyncStorage } from '../services/async-storage.service';
 import { useAuthService } from '../services/auth.service';
 
 export const AuthProvider = ({ children }) => {
   const authService = useAuthService();
+  const asyncStorage = useAsyncStorage();
   const [user, setUser] = useState(undefined);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [authenticationError, setAuthenticationError] = useState(undefined);
 
+  useEffect(() => {
+    const loadStoragedData = async () => {
+      const storagedUserData = await asyncStorage.getUser();
+      const storagedToken = await asyncStorage.getToken();
+
+      if (storagedUserData && storagedToken) {
+        setUser(storagedUserData);
+      }
+    };
+
+    loadStoragedData();
+  }, [asyncStorage]);
+
   const signIn = async ({ email, password }) => {
     try {
       setIsAuthenticating(true);
-      const { user: userData } = await authService.signIn({ email, password });
+      // eslint-disable-next-line prettier/prettier
+      const { user: userData, token } = await authService.signIn({ email, password });
       setUser(userData);
+
+      await asyncStorage.setToken(token);
+      await asyncStorage.setUser(userData);
     } catch (error) {
       setAuthenticationError(error);
     } finally {
@@ -19,7 +38,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signOut = () => {
+  const signOut = async () => {
+    await asyncStorage.clearStorage();
     authService.signOut();
     setUser(undefined);
   };
