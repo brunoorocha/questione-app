@@ -1,10 +1,11 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import { useAuthService } from '../services/auth.service';
 
 export const AuthProvider = ({ children }) => {
   const authService = useAuthService();
   const [user, setUser] = useState(undefined);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [authenticationError, setAuthenticationError] = useState(undefined);
 
   const signIn = async ({ email, password }) => {
     try {
@@ -12,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authService.signIn({ email, password });
       setUser(response[0]);
     } catch (error) {
-      console.log(error);
+      setAuthenticationError(error);
     } finally {
       setIsAuthenticating(false);
     }
@@ -27,8 +28,9 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         isUserAuthenticated: !!user,
-        user,
         isAuthenticating,
+        authenticationError,
+        user,
         signIn,
         signOut,
       }}>
@@ -39,4 +41,11 @@ export const AuthProvider = ({ children }) => {
 
 const AuthContext = createContext({});
 
-export default AuthContext;
+export const useAuthContext = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuthContext must be used within a AuthProvider');
+  }
+
+  return context;
+};

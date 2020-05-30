@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Heading2,
   Content,
@@ -12,13 +12,13 @@ import {
 import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
 import { routesNames } from '../../routes/routesNames';
-import AuthContext from '../../contexts/auth';
+import { useAuthContext } from '../../contexts/auth';
 
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signIn, isAuthenticating } = useContext(AuthContext);
+  const { signIn, isAuthenticating } = useAuthContext();
 
   const onPressForgotMyPassword = () => {
     navigation.push(routesNames.forgotPassword);
