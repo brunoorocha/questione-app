@@ -16,9 +16,10 @@ Icon.loadFont();
 const ActionSheetOverlay = styled.View`
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: ${Dimensions.get('window').width}px;
+  height: ${Dimensions.get('window').height}px;
   justify-content: flex-end;
+  flex: 1;
 `;
 
 const ActionSheetList = styled.View`

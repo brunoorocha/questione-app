@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StatusBar } from 'react-native';
 import {
   Heading1,
@@ -6,8 +6,6 @@ import {
   HomeCardMenu,
   HomeCard,
   MoreButton,
-  ActionSheet,
-  ActionSheetItem,
   colors,
 } from '../../components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -23,7 +21,6 @@ import { useAuthContext } from '../../contexts/auth';
 Icon.loadFont();
 
 export default function Home({ navigation }) {
-  const [isShowingActionSheet, setIsShowingActionSheet] = useState(false);
   const { user, signOut } = useAuthContext();
 
   const formattedUserName = (name) => {
@@ -40,11 +37,7 @@ export default function Home({ navigation }) {
   };
 
   const onPressMoreButton = () => {
-    setIsShowingActionSheet(true);
-  };
-
-  const onPressActionSheetCancellButton = () => {
-    setIsShowingActionSheet(false);
+    onPressSignOutButton();
   };
 
   const onPressSignOutButton = () => {
@@ -83,17 +76,6 @@ export default function Home({ navigation }) {
           onPress={onPressDoTest}
         />
       </HomeCardMenu>
-
-      <ActionSheet
-        isOpen={isShowingActionSheet}
-        onPressCancel={onPressActionSheetCancellButton}>
-        <ActionSheetItem
-          title="Fazer logout"
-          type="destructive"
-          onPress={onPressSignOutButton}
-          icon={<Icon name="exit-to-app" size={20} color={colors.red} />}
-        />
-      </ActionSheet>
     </ContentView>
   );
 }

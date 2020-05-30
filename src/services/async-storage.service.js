@@ -29,8 +29,8 @@ export const useAsyncStorage = () => {
   };
 
   const clearStorage = async () => {
-    await AsyncStorage.setItem(userKey, undefined);
-    await AsyncStorage.setItem(tokenKey, undefined);
+    await AsyncStorage.removeItem(userKey);
+    await AsyncStorage.removeItem(tokenKey);
   };
 
   return { setUser, getUser, setToken, getToken, clearStorage };
