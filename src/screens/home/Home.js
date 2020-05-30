@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
 import {
   Heading1,
@@ -18,13 +18,13 @@ import {
   GreetingView,
 } from './styles';
 import { routesNames } from '../../routes/routesNames';
-import AuthContext from '../../contexts/auth';
+import { useAuthContext } from '../../contexts/auth';
 
 Icon.loadFont();
 
 export default function Home({ navigation }) {
   const [isShowingActionSheet, setIsShowingActionSheet] = useState(false);
-  const { user, signOut } = useContext(AuthContext);
+  const { user, signOut } = useAuthContext();
 
   const formattedUserName = (name) => {
     const [firstName, secondName] = name.split(' ');
