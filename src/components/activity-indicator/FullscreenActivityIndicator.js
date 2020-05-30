@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Animated, Dimensions } from 'react-native';
-import { BackgroundView, ActivityIndicatorView } from './styles';
+import { ActivityIndicatorView } from './styles';
 import { colors } from '../colors/Colors';
 
 export const FullscreenActivityIndicator = ({ isVisible }) => {
   const [animation] = useState(new Animated.Value(0));
   // eslint-disable-next-line prettier/prettier
-  const AnimatedBackgroundView = Animated.createAnimatedComponent(BackgroundView);
+  const AnimatedActivityIndicatorView = Animated.createAnimatedComponent(ActivityIndicatorView);
   const windowHeight = Dimensions.get('window').height;
 
   const animatedStyles = {
@@ -31,10 +31,8 @@ export const FullscreenActivityIndicator = ({ isVisible }) => {
   }, [animation, isVisible]);
 
   return (
-    <AnimatedBackgroundView style={animatedStyles}>
-      <ActivityIndicatorView>
-        <ActivityIndicator size="large" color={colors.lightGray} />
-      </ActivityIndicatorView>
-    </AnimatedBackgroundView>
+    <AnimatedActivityIndicatorView style={animatedStyles}>
+      <ActivityIndicator size="large" color={colors.primaryColor} />
+    </AnimatedActivityIndicatorView>
   );
 };

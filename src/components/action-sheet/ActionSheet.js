@@ -5,12 +5,16 @@ import {
   Dimensions,
   SafeAreaView,
   TouchableWithoutFeedback,
+  TouchableHighlight,
 } from 'react-native';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../colors/Colors';
 
+Icon.loadFont();
+
 const ActionSheetOverlay = styled.View`
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -18,30 +22,27 @@ const ActionSheetOverlay = styled.View`
 `;
 
 const ActionSheetList = styled.View`
-  background-color: transparent;
-  padding: 0px 16px;
+  background-color: ${colors.white};
+  padding: 8px 0px;
 `;
 
-const ActionSheetItemWrapper = styled.TouchableHighlight`
-  padding: 20px 0px;
+const ActionSheetItemWrapper = styled.View`
+  flex-direction: row;
+  padding: 16px;
 `;
 
 const ActionSheetItemTitle = styled.Text`
-  text-align: center;
+  text-align: left;
   font-size: 16px;
-  font-family: 'Roboto-Bold';
+  font-family: 'Roboto-Regular';
   color: ${(props) => props.color ?? colors.textColor};
-  text-transform: uppercase;
 `;
 
-const ActionGroup = styled.View`
-  background-color: ${colors.white};
-  border-radius: 8px;
-  margin-bottom: 16px;
-  overflow: hidden;
+const ActionSheetItemIconView = styled.View`
+  margin-right: 16px;
 `;
 
-export const ActionSheetItem = ({ title, onPress, type }) => {
+export const ActionSheetItem = ({ title, onPress, type, icon }) => {
   const _type = type ?? 'default';
   const _actionTypes = {
     default: {
@@ -53,11 +54,14 @@ export const ActionSheetItem = ({ title, onPress, type }) => {
   };
 
   return (
-    <ActionSheetItemWrapper onPress={onPress} underlayColor={colors.lightGray}>
-      <ActionSheetItemTitle color={_actionTypes[_type].color}>
-        {title}
-      </ActionSheetItemTitle>
-    </ActionSheetItemWrapper>
+    <TouchableHighlight onPress={onPress} underlayColor={colors.lightGray}>
+      <ActionSheetItemWrapper>
+        {icon && <ActionSheetItemIconView>{icon}</ActionSheetItemIconView>}
+        <ActionSheetItemTitle color={_actionTypes[_type].color}>
+          {title}
+        </ActionSheetItemTitle>
+      </ActionSheetItemWrapper>
+    </TouchableHighlight>
   );
 };
 
@@ -108,11 +112,12 @@ export const ActionSheet = ({ children, isOpen, onPressCancel }) => {
       <AnimatedActionSheetOverlay style={[animatedStyles.overlay]}>
         <AnimatedActionSheetList style={[animatedStyles.list]}>
           <SafeAreaView>
-            <ActionGroup>{children}</ActionGroup>
-
-            <ActionGroup>
-              <ActionSheetItem title="Cancelar" onPress={onPressCancel} />
-            </ActionGroup>
+            {children}
+            <ActionSheetItem
+              title="Cancelar"
+              onPress={onPressCancel}
+              icon={<Icon name="close" size={20} color={colors.textColor} />}
+            />
           </SafeAreaView>
         </AnimatedActionSheetList>
       </AnimatedActionSheetOverlay>

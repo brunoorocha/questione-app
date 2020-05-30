@@ -91,6 +91,7 @@ export default function Home({ navigation }) {
           title="Fazer logout"
           type="destructive"
           onPress={onPressSignOutButton}
+          icon={<Icon name="exit-to-app" size={20} color={colors.red} />}
         />
       </ActionSheet>
     </ContentView>
