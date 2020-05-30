@@ -10,8 +10,9 @@ export const AuthProvider = ({ children }) => {
   const signIn = async ({ email, password }) => {
     try {
       setIsAuthenticating(true);
-      const response = await authService.signIn({ email, password });
-      setUser(response[0]);
+      // eslint-disable-next-line prettier/prettier
+      const { user: userData } = await authService.signIn({ email, password });
+      setUser(userData);
     } catch (error) {
       setAuthenticationError(error);
     } finally {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import {
   Heading2,
   Content,
@@ -17,8 +18,16 @@ import { useAuthContext } from '../../contexts/auth';
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signIn, isAuthenticating, authenticationError } = useAuthContext();
 
-  const { signIn, isAuthenticating } = useAuthContext();
+  useEffect(() => {
+    if (authenticationError) {
+      Alert.alert(
+        'Ooops, algo não está certo',
+        `${authenticationError.message}`,
+      );
+    }
+  }, [authenticationError]);
 
   const onPressForgotMyPassword = () => {
     navigation.push(routesNames.forgotPassword);
