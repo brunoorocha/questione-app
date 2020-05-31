@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       setAuthenticationError(error);
     } finally {
+      setAuthenticationError(undefined);
       setIsAuthenticating(false);
     }
   };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Alert } from 'react-native';
 import {
   Heading2,
   Content,
@@ -9,6 +8,7 @@ import {
   Label,
   SafeAreaView,
   FullscreenActivityIndicator,
+  useMessageCenter,
 } from '../../components';
 import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
@@ -19,14 +19,13 @@ export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signIn, isAuthenticating, authenticationError } = useAuthContext();
+  const { showMessage, MessageCenter } = useMessageCenter();
 
   useEffect(() => {
     if (authenticationError) {
-      Alert.alert(
-        'Ooops, algo não está certo',
-        `${authenticationError.message}`,
-      );
+      showMessage({ text: authenticationError.message });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authenticationError]);
 
   const onPressForgotMyPassword = () => {
@@ -75,6 +74,7 @@ export default function SignIn({ navigation }) {
       </Content>
 
       <FullscreenActivityIndicator isVisible={isAuthenticating} />
+      <MessageCenter />
     </SafeAreaView>
   );
 }

@@ -22,3 +22,4 @@ export * from './chips/Chips';
 export * from './number-card/NumberCard';
 export * from './search-field/SeachField';
 export * from './activity-indicator/FullscreenActivityIndicator';
+export * from './message-center/MessageCenter';
