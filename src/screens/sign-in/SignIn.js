@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
 import {
   Heading2,
   Content,
@@ -18,8 +19,17 @@ import { useAuthContext } from '../../contexts/auth';
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [formErrors, setFormErrors] = useState({});
   const { signIn, isAuthenticating, authenticationError } = useAuthContext();
   const { showMessage, MessageCenter } = useMessageCenter();
+
+  const formValidationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required('Por favor informe seu email')
+      .email('O seu email deve estar no formato seuemail@exemplo.com'),
+    password: yup.string().required('Por favor informe sua senha'),
+  });
 
   useEffect(() => {
     if (authenticationError) {
@@ -37,7 +47,22 @@ export default function SignIn({ navigation }) {
   };
 
   const onPressSignIn = () => {
-    signIn({ email, password });
+    const credentials = { email, password };
+    formValidationSchema
+      .validate(credentials, { abortEarly: false })
+      .then(() => {
+        signIn(credentials);
+      })
+      .catch((errors) => {
+        // eslint-disable-next-line prettier/prettier
+        const emailError = errors.inner.filter((error) => error.path === 'email').pop();
+        // eslint-disable-next-line prettier/prettier
+        const passwordError = errors.inner.filter((error) => error.path === 'password').pop();
+        setFormErrors({
+          email: emailError?.message,
+          password: passwordError.message,
+        });
+      });
   };
 
   return (
@@ -52,13 +77,21 @@ export default function SignIn({ navigation }) {
             keyboardType="email-address"
             label="Email"
             marginBottom={16}
-            onChangeText={setEmail}
-            error=""
+            error={formErrors.email}
+            autoCapitalize="none"
+            onChangeText={(text) => {
+              setEmail(text);
+              setFormErrors({ ...formErrors, email: '' });
+            }}
           />
           <TextField
             secureTextEntry={true}
             label="Senha"
-            onChangeText={setPassword}
+            error={formErrors.password}
+            onChangeText={(text) => {
+              setPassword(text);
+              setFormErrors({ ...formErrors, password: '' });
+            }}
           />
           <LinkButton onPress={onPressForgotMyPassword}>
             Esqueci minha senha

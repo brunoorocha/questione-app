@@ -16,6 +16,7 @@ export const TextField = ({
   error,
   keyboardType = 'default',
   secureTextEntry = false,
+  autoCapitalize,
   marginBottom,
   onChangeText,
 }) => {
@@ -56,12 +57,15 @@ export const TextField = ({
         <TextFieldView isActive={isFocused} hasError={hasError}>
           <FieldLabel isActive={isActive}>{label}</FieldLabel>
           <TextInput
-            keyboardType={keyboardType}
-            secureTextEntry={secureTextEntry}
-            onFocus={onFocus}
-            onBlur={onBlur}
+            {...{
+              keyboardType,
+              secureTextEntry,
+              onFocus,
+              onBlur,
+              value,
+              autoCapitalize,
+            }}
             onChangeText={_onChangeText}
-            value={value}
             ref={(input) => {
               textInputRef = input;
             }}
