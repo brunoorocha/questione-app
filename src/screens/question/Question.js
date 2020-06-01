@@ -17,7 +17,7 @@ import {
   colors,
 } from '../../components';
 import { QuestionView, ButtonsView, View } from './styles';
-import { routesNames } from '../../routes';
+import { routesNames } from '../../routes/routesNames';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 Icon.loadFont();
@@ -103,8 +103,13 @@ export default function Question({ navigation }) {
           title="Sair da prova"
           type="destructive"
           onPress={() => {}}
+          icon={<Icon name="exit-to-app" size={20} color={colors.red} />}
         />
-        <ActionSheetItem title="Reportar erro" onPress={() => {}} />
+        <ActionSheetItem
+          title="Reportar erro"
+          onPress={() => {}}
+          icon={<Icon name="warning" size={20} color={colors.textColor} />}
+        />
       </ActionSheet>
     </View>
   );

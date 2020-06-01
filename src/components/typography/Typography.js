@@ -6,6 +6,7 @@ export const Heading1 = styled.Text`
   font-family: 'Roboto-Black';
   color: ${(props) => props.color ?? colors.textColor};
   margin-bottom: 16px;
+  text-transform: capitalize;
 `;
 
 export const Heading2 = styled.Text`

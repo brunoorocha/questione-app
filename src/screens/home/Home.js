@@ -1,19 +1,33 @@
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import {
   Heading1,
   Heading3,
   HomeCardMenu,
   HomeCard,
+  MoreButton,
   colors,
 } from '../../components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { HeaderView } from './styles';
-import { routesNames } from '../../routes';
+import {
+  HeaderView,
+  ContentView,
+  MoreButtonView,
+  GreetingView,
+} from './styles';
+import { routesNames } from '../../routes/routesNames';
+import { useAuthContext } from '../../contexts/auth';
 
 Icon.loadFont();
 
 export default function Home({ navigation }) {
+  const { user, signOut } = useAuthContext();
+
+  const formattedUserName = (name) => {
+    const [firstName, secondName] = name.split(' ');
+    return `${firstName} ${secondName}`;
+  };
+
   const onPressDoTest = () => {
     navigation.push(routesNames.evaluation);
   };
@@ -22,15 +36,31 @@ export default function Home({ navigation }) {
     navigation.push(routesNames.answeredTests);
   };
 
+  const onPressMoreButton = () => {
+    onPressSignOutButton();
+  };
+
+  const onPressSignOutButton = () => {
+    signOut();
+  };
+
   return (
-    <View>
+    <ContentView>
       <StatusBar
         barStyle="light-content"
         backgroundColor={colors.primaryColor}
       />
       <HeaderView>
-        <Heading3 color={colors.white}>Olá,</Heading3>
-        <Heading1 color={colors.white}>Bruno Rocha</Heading1>
+        <MoreButtonView>
+          <MoreButton onPress={onPressMoreButton} color={colors.white} />
+        </MoreButtonView>
+
+        <GreetingView>
+          <Heading3 color={colors.white}>Olá,</Heading3>
+          <Heading1 color={colors.white}>
+            {user.name ? formattedUserName(user.name) : ''}
+          </Heading1>
+        </GreetingView>
       </HeaderView>
       <HomeCardMenu>
         <HomeCard
@@ -46,6 +76,6 @@ export default function Home({ navigation }) {
           onPress={onPressDoTest}
         />
       </HomeCardMenu>
-    </View>
+    </ContentView>
   );
 }
