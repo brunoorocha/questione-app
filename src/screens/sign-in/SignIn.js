@@ -53,6 +53,7 @@ export default function SignIn({ navigation }) {
             label="Email"
             marginBottom={16}
             onChangeText={setEmail}
+            error=""
           />
           <TextField
             secureTextEntry={true}

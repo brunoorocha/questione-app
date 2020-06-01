@@ -16,6 +16,7 @@ const Link = styled.Text`
 
 const PrimaryButtonWrapper = styled.TouchableOpacity`
   background-color: ${colors.primaryColor};
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)}
   height: 48px;
   display: flex;
   flex: 1;
@@ -75,9 +76,12 @@ export const LinkButton = (props) => (
   </TouchableOpacity>
 );
 
-export const PrimaryButton = (props) => (
-  <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
-    <ButtonText color={colors.white}>{props.children}</ButtonText>
+export const PrimaryButton = ({ children, onPress, isDisabled }) => (
+  <PrimaryButtonWrapper
+    onPress={onPress}
+    activeOpacity={0.7}
+    disabled={isDisabled}>
+    <ButtonText color={colors.white}>{children}</ButtonText>
   </PrimaryButtonWrapper>
 );
 
