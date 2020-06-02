@@ -18,7 +18,9 @@ export const TextField = ({
   secureTextEntry = false,
   autoCapitalize,
   marginBottom,
-  onChangeText,
+  onChangeText = () => {},
+  onBlur = () => {},
+  onFocus = () => {},
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -26,17 +28,19 @@ export const TextField = ({
   const hasError = !!error && error !== '';
   let textInputRef;
 
-  const onFocus = () => {
+  const _onFocus = () => {
     setIsFocused(true);
     setIsActive(true);
+    onFocus();
   };
 
-  const onBlur = () => {
+  const _onBlur = () => {
     if (value === '') {
       setIsActive(false);
     }
 
     setIsFocused(false);
+    onBlur();
   };
 
   const didTapOnTextFieldView = () => {
@@ -45,10 +49,7 @@ export const TextField = ({
 
   const _onChangeText = (text) => {
     setValue(text);
-
-    if (onChangeText) {
-      onChangeText(text);
-    }
+    onChangeText(text);
   };
 
   return (
@@ -60,12 +61,12 @@ export const TextField = ({
             {...{
               keyboardType,
               secureTextEntry,
-              onFocus,
-              onBlur,
               value,
               autoCapitalize,
             }}
             onChangeText={_onChangeText}
+            onFocus={_onFocus}
+            onBlur={_onBlur}
             ref={(input) => {
               textInputRef = input;
             }}

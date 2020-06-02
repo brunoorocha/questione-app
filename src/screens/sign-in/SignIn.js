@@ -60,9 +60,20 @@ export default function SignIn({ navigation }) {
         const passwordError = errors.inner.filter((error) => error.path === 'password').pop();
         setFormErrors({
           email: emailError?.message,
-          password: passwordError.message,
+          password: passwordError?.message,
         });
       });
+  };
+
+  const checkErrorsForField = (fieldName, value) => {
+    const field = {};
+    field[fieldName] = value;
+
+    formValidationSchema.validateAt(fieldName, field).catch((error) => {
+      const fieldErrorMessage = {};
+      fieldErrorMessage[fieldName] = error.message;
+      setFormErrors({ ...formErrors, ...fieldErrorMessage });
+    });
   };
 
   return (
@@ -83,6 +94,9 @@ export default function SignIn({ navigation }) {
               setEmail(text);
               setFormErrors({ ...formErrors, email: '' });
             }}
+            onBlur={() => {
+              checkErrorsForField('email', email);
+            }}
           />
           <TextField
             secureTextEntry={true}
@@ -91,6 +105,9 @@ export default function SignIn({ navigation }) {
             onChangeText={(text) => {
               setPassword(text);
               setFormErrors({ ...formErrors, password: '' });
+            }}
+            onBlur={() => {
+              checkErrorsForField('password', password);
             }}
           />
           <LinkButton onPress={onPressForgotMyPassword}>
