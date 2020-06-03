@@ -7,7 +7,7 @@ export const useFormErrors = (validationSchema) => {
     );
   }
 
-  if (!validationSchema.validateAt || validationSchema.validate) {
+  if (!validationSchema.validateAt || !validationSchema.validate) {
     throw new Error(
       "The validation schema don't the expected methods validateAt and/or validate",
     );
