@@ -25,7 +25,7 @@ export default function SignUp(props) {
     cpf: yup.string().required('Por favor informe seu CPF'),
     email: yup
       .string()
-      .required('Por favor informe seu CPF')
+      .required('Por favor informe seu email')
       .email('O seu email deve estar no formato seuemail@exemplo.com'),
     password: yup
       .string()
@@ -64,9 +64,45 @@ export default function SignUp(props) {
             clearErrorsForField('name');
           }}
         />
-        <TextField label="CPF" marginBottom={16} />
-        <TextField label="Email" marginBottom={16} />
-        <TextField label="Senha" marginBottom={16} secureTextEntry={true} />
+        <TextField
+          label="CPF"
+          type="cpf"
+          keyboardType="numeric"
+          marginBottom={16}
+          error={formErrors.cpf}
+          onBlur={() => {
+            checkErrorsForField('cpf', cpf);
+          }}
+          onChangeText={(text) => {
+            setCpf(text);
+            clearErrorsForField('cpf');
+          }}
+        />
+        <TextField
+          label="Email"
+          marginBottom={16}
+          error={formErrors.email}
+          onBlur={() => {
+            checkErrorsForField('email', email);
+          }}
+          onChangeText={(text) => {
+            setEmail(text);
+            clearErrorsForField('email');
+          }}
+        />
+        <TextField
+          label="Senha"
+          marginBottom={16}
+          secureTextEntry={true}
+          error={formErrors.password}
+          onBlur={() => {
+            checkErrorsForField('password', password);
+          }}
+          onChangeText={(text) => {
+            setPassword(text);
+            clearErrorsForField('password');
+          }}
+        />
         <PrimaryButton onPress={onPressSignUp}>Criar conta</PrimaryButton>
       </Content>
     </BaseView>

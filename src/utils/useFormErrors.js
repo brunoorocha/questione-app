@@ -24,8 +24,8 @@ export const useFormErrors = (validationSchema) => {
           const fieldNames = errors.inner.map((error) => error.path);
           const fieldsErrors = fieldNames.reduce((errorObject, fieldName) => {
             // eslint-disable-next-line prettier/prettier
-            const fieldError = errors.inner.filter((error) => error.path === fieldName).pop();
-            errorObject[fieldName] = fieldError.message;
+            const fieldError = errors.inner.filter((error) => error.path === fieldName);
+            errorObject[fieldName] = fieldError[0]?.message;
             return errorObject;
           }, {});
 
