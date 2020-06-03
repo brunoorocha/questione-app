@@ -88,7 +88,7 @@ export default function SignIn({ navigation }) {
             error={formErrors.password}
             onChangeText={(text) => {
               setPassword(text);
-              clearErrorsForField('email');
+              clearErrorsForField('password');
             }}
             onBlur={() => {
               checkErrorsForField('password', password);
