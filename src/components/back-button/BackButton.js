@@ -5,9 +5,9 @@ import { colors } from '../colors/Colors';
 
 Icon.loadFont();
 
-export const BackButton = (props) => {
+export const BackButton = ({ onPress }) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={props.onPress}>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <Icon name="arrow-back" color={colors.primaryColor} size={20} />
     </TouchableOpacity>
   );

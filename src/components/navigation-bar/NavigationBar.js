@@ -13,7 +13,8 @@ const NavigationBarView = styled.View`
   background-color: ${colors.white};
   height: 48px;
   border: 1px solid transparent;
-  border-bottom-color: ${colors.lightGray};
+  border-bottom-color: ${(props) =>
+    props.hideBorderBottom ? colors.white : colors.lightGray};
 `;
 
 const CenterItem = styled.View`
@@ -32,12 +33,12 @@ const ButtonItem = styled.View`
 `;
 
 export const NavigationBar = ({
-  showBackButton,
+  showBackButton = true,
   navigation,
   title,
   rightItem,
+  hideBorderBottom = false,
 }) => {
-  const _showBackButton = showBackButton !== undefined ? showBackButton : true;
   const _isTitleString = typeof title === 'string';
 
   const onPressBackButton = () => {
@@ -45,8 +46,8 @@ export const NavigationBar = ({
   };
 
   return (
-    <NavigationBarView>
-      {_showBackButton ? (
+    <NavigationBarView hideBorderBottom={hideBorderBottom}>
+      {showBackButton ? (
         <ButtonItem>
           <BackButton onPress={onPressBackButton} />
         </ButtonItem>

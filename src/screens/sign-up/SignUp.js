@@ -52,7 +52,7 @@ export default function SignUp(props) {
   };
 
   return (
-    <BaseView {...props} title="Criar conta">
+    <BaseView {...props} navigationHideBorderBottom={true}>
       <Content>
         <HeaderView>
           <Heading2>Crie uma nova conta</Heading2>

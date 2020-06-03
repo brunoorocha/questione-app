@@ -10,6 +10,7 @@ export const BaseView = ({
   navigation,
   navigationRightItem,
   navigationShowBackButton,
+  navigationHideBorderBottom,
 }) => {
   return (
     <SafeAreaView>
@@ -19,6 +20,7 @@ export const BaseView = ({
         rightItem={navigationRightItem}
         title={title}
         navigation={navigation}
+        hideBorderBottom={navigationHideBorderBottom}
       />
       {children}
     </SafeAreaView>
