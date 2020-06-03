@@ -19,7 +19,14 @@ export const useAuthService = () => {
     return { token, user };
   };
 
-  const signUp = ({ name, cpf, email, password }) => {};
+  const signUp = async ({ name, cpf, email, password }) => {
+    // eslint-disable-next-line prettier/prettier
+    const { data } = await service.post(QuestioneApiResources.signUp, { name, cpf, email, password });
+    checkApiErrorMessageReturn(data);
+
+    const user = data[0];
+    return { user };
+  };
 
   const signOut = () => {};
 

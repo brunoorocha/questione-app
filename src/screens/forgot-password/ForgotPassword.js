@@ -11,7 +11,7 @@ import { HeaderView } from './styles';
 
 export default function ForgotPassword(props) {
   return (
-    <BaseView {...props} title="Esqueci minha senha">
+    <BaseView {...props} navigationHideBorderBottom={true}>
       <Content>
         <HeaderView>
           <Heading2>Esqueceu sua senha?</Heading2>

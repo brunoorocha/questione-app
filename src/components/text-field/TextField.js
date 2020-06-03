@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   FieldLabel,
@@ -13,12 +14,15 @@ Icon.loadFont();
 
 export const TextField = ({
   label = '',
+  type,
   error,
   keyboardType = 'default',
   secureTextEntry = false,
   autoCapitalize,
   marginBottom,
-  onChangeText,
+  onChangeText = () => {},
+  onBlur = () => {},
+  onFocus = () => {},
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -26,17 +30,19 @@ export const TextField = ({
   const hasError = !!error && error !== '';
   let textInputRef;
 
-  const onFocus = () => {
+  const _onFocus = () => {
     setIsFocused(true);
     setIsActive(true);
+    onFocus();
   };
 
-  const onBlur = () => {
+  const _onBlur = () => {
     if (value === '') {
       setIsActive(false);
     }
 
     setIsFocused(false);
+    onBlur();
   };
 
   const didTapOnTextFieldView = () => {
@@ -45,10 +51,18 @@ export const TextField = ({
 
   const _onChangeText = (text) => {
     setValue(text);
+    onChangeText(text);
+  };
 
-    if (onChangeText) {
-      onChangeText(text);
-    }
+  const textInputProps = {
+    type,
+    keyboardType,
+    secureTextEntry,
+    value,
+    autoCapitalize,
+    onBlur: _onBlur,
+    onFocus: _onFocus,
+    onChangeText: _onChangeText,
   };
 
   return (
@@ -56,20 +70,21 @@ export const TextField = ({
       <TouchableWithoutFeedback onPress={didTapOnTextFieldView}>
         <TextFieldView isActive={isFocused} hasError={hasError}>
           <FieldLabel isActive={isActive}>{label}</FieldLabel>
-          <TextInput
-            {...{
-              keyboardType,
-              secureTextEntry,
-              onFocus,
-              onBlur,
-              value,
-              autoCapitalize,
-            }}
-            onChangeText={_onChangeText}
-            ref={(input) => {
-              textInputRef = input;
-            }}
-          />
+          {type ? (
+            <TextInputMask
+              {...textInputProps}
+              refInput={(input) => {
+                textInputRef = input;
+              }}
+            />
+          ) : (
+            <TextInput
+              {...textInputProps}
+              ref={(input) => {
+                textInputRef = input;
+              }}
+            />
+          )}
         </TextFieldView>
       </TouchableWithoutFeedback>
       {hasError && <ErrorMessage>{error}</ErrorMessage>}
