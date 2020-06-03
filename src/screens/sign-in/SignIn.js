@@ -15,11 +15,11 @@ import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
 import { routesNames } from '../../routes/routesNames';
 import { useAuthContext } from '../../contexts/auth';
+import { useFormErrors } from '../../utils/useFormErrors';
 
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [formErrors, setFormErrors] = useState({});
   const { signIn, isAuthenticating, authenticationError } = useAuthContext();
   const { showMessage, MessageCenter } = useMessageCenter();
 
@@ -30,6 +30,13 @@ export default function SignIn({ navigation }) {
       .email('O seu email deve estar no formato seuemail@exemplo.com'),
     password: yup.string().required('Por favor informe sua senha'),
   });
+
+  const {
+    formErrors,
+    checkErrorsForField,
+    clearErrorsForField,
+    validate,
+  } = useFormErrors(formValidationSchema);
 
   useEffect(() => {
     if (authenticationError) {
@@ -48,31 +55,8 @@ export default function SignIn({ navigation }) {
 
   const onPressSignIn = () => {
     const credentials = { email, password };
-    formValidationSchema
-      .validate(credentials, { abortEarly: false })
-      .then(() => {
-        signIn(credentials);
-      })
-      .catch((errors) => {
-        // eslint-disable-next-line prettier/prettier
-        const emailError = errors.inner.filter((error) => error.path === 'email').pop();
-        // eslint-disable-next-line prettier/prettier
-        const passwordError = errors.inner.filter((error) => error.path === 'password').pop();
-        setFormErrors({
-          email: emailError?.message,
-          password: passwordError?.message,
-        });
-      });
-  };
-
-  const checkErrorsForField = (fieldName, value) => {
-    const field = {};
-    field[fieldName] = value;
-
-    formValidationSchema.validateAt(fieldName, field).catch((error) => {
-      const fieldErrorMessage = {};
-      fieldErrorMessage[fieldName] = error.message;
-      setFormErrors({ ...formErrors, ...fieldErrorMessage });
+    validate(credentials).then(() => {
+      signIn(credentials);
     });
   };
 
@@ -92,7 +76,7 @@ export default function SignIn({ navigation }) {
             autoCapitalize="none"
             onChangeText={(text) => {
               setEmail(text);
-              setFormErrors({ ...formErrors, email: '' });
+              clearErrorsForField('email');
             }}
             onBlur={() => {
               checkErrorsForField('email', email);
@@ -104,7 +88,7 @@ export default function SignIn({ navigation }) {
             error={formErrors.password}
             onChangeText={(text) => {
               setPassword(text);
-              setFormErrors({ ...formErrors, password: '' });
+              clearErrorsForField('email');
             }}
             onBlur={() => {
               checkErrorsForField('password', password);
