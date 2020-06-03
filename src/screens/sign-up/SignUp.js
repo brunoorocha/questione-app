@@ -6,15 +6,18 @@ import {
   TextField,
   PrimaryButton,
   BaseView,
+  FullscreenActivityIndicator,
 } from '../../components';
 import { HeaderView } from './styles';
 import { useFormErrors } from '../../utils/useFormErrors';
+import { useAuthContext } from '../../contexts/auth';
 
 export default function SignUp(props) {
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signUp, isAuthenticating } = useAuthContext();
 
   const formValidationSchema = yup.object().shape({
     name: yup
@@ -43,7 +46,9 @@ export default function SignUp(props) {
 
   const onPressSignUp = () => {
     const signUpPayload = { name, cpf, email, password };
-    validate(signUpPayload).then(() => {});
+    validate(signUpPayload).then(() => {
+      signUp(signUpPayload);
+    });
   };
 
   return (
@@ -80,6 +85,8 @@ export default function SignUp(props) {
         />
         <TextField
           label="Email"
+          autoCapitalize={false}
+          keyboardType="email-address"
           marginBottom={16}
           error={formErrors.email}
           onBlur={() => {
@@ -105,6 +112,8 @@ export default function SignUp(props) {
         />
         <PrimaryButton onPress={onPressSignUp}>Criar conta</PrimaryButton>
       </Content>
+
+      <FullscreenActivityIndicator isVisible={isAuthenticating} />
     </BaseView>
   );
 }

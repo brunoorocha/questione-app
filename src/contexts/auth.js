@@ -39,6 +39,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signUp = async ({ name, cpf, email, password }) => {
+    try {
+      setIsAuthenticating(true);
+      await authService.signUp({ name, cpf, email, password });
+      signIn({ email, password });
+    } catch (error) {
+      setAuthenticationError(error);
+    } finally {
+      setAuthenticationError(undefined);
+      setIsAuthenticating(false);
+    }
+  };
+
   const signOut = async () => {
     await asyncStorage.clearStorage();
     authService.signOut();
@@ -53,6 +66,7 @@ export const AuthProvider = ({ children }) => {
         authenticationError,
         user,
         signIn,
+        signUp,
         signOut,
       }}>
       {children}
