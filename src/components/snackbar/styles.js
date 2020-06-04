@@ -12,7 +12,7 @@ export const SnackbarView = styled.View`
   flex: 1;
   background-color: ${colors.darkGray};
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
 `;
 
 export const SnackbarText = styled.Text`

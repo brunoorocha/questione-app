@@ -85,7 +85,7 @@ export default function SignUp(props) {
         />
         <TextField
           label="Email"
-          autoCapitalize={false}
+          autoCapitalize="none"
           keyboardType="email-address"
           marginBottom={16}
           error={formErrors.email}

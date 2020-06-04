@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useAsyncStorage } from '../services/async-storage.service';
 import { useAuthService } from '../services/auth.service';
+import { useMessageCenterContext } from './message-center';
 
 export const AuthProvider = ({ children }) => {
   const authService = useAuthService();
@@ -8,18 +9,22 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [authenticationError, setAuthenticationError] = useState(undefined);
+  const { dispatchMessage } = useMessageCenterContext();
 
   useEffect(() => {
+    let canUpdate = true;
     const loadStoragedData = async () => {
       const storagedUserData = await asyncStorage.getUser();
       const storagedToken = await asyncStorage.getToken();
 
-      if (storagedUserData && storagedToken) {
+      if (storagedUserData && storagedToken && canUpdate) {
         setUser(storagedUserData);
       }
     };
 
     loadStoragedData();
+
+    return () => (canUpdate = false);
   }, [asyncStorage]);
 
   const signIn = async ({ email, password }) => {
@@ -32,7 +37,7 @@ export const AuthProvider = ({ children }) => {
       await asyncStorage.setToken(token);
       await asyncStorage.setUser(userData);
     } catch (error) {
-      setAuthenticationError(error);
+      dispatchMessage({ text: error.message });
     } finally {
       setAuthenticationError(undefined);
       setIsAuthenticating(false);
@@ -79,7 +84,7 @@ const AuthContext = createContext({});
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuthContext must be used within a AuthProvider');
+    throw new Error('useAuthContext must be used inside a AuthProvider');
   }
 
   return context;

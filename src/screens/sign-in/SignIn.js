@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import {
   Heading2,
@@ -9,7 +9,6 @@ import {
   Label,
   SafeAreaView,
   FullscreenActivityIndicator,
-  useMessageCenter,
 } from '../../components';
 import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
@@ -20,8 +19,7 @@ import { useFormErrors } from '../../utils/useFormErrors';
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, isAuthenticating, authenticationError } = useAuthContext();
-  const { showMessage, MessageCenter } = useMessageCenter();
+  const { signIn, isAuthenticating } = useAuthContext();
 
   const formValidationSchema = yup.object().shape({
     email: yup
@@ -37,13 +35,6 @@ export default function SignIn({ navigation }) {
     clearErrorsForField,
     validate,
   } = useFormErrors(formValidationSchema);
-
-  useEffect(() => {
-    if (authenticationError) {
-      showMessage({ text: authenticationError.message });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authenticationError]);
 
   const onPressForgotMyPassword = () => {
     navigation.push(routesNames.forgotPassword);
@@ -109,7 +100,6 @@ export default function SignIn({ navigation }) {
       </Content>
 
       <FullscreenActivityIndicator isVisible={isAuthenticating} />
-      <MessageCenter />
     </SafeAreaView>
   );
 }
