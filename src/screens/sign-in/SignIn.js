@@ -13,13 +13,11 @@ import {
 import { HeaderView, LogoImage, FooterView, FieldsView } from './styles';
 import logo from '../../assets/images/logo-black-blue.png';
 import { routesNames } from '../../routes/routesNames';
-import { useAuthContext } from '../../contexts/auth';
 import { useFormErrors } from '../../utils/useFormErrors';
 
-export default function SignIn({ navigation }) {
+export default function SignIn({ navigation, isAuthenticating, signIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, state } = useAuthContext();
 
   const formValidationSchema = yup.object().shape({
     email: yup
@@ -99,7 +97,7 @@ export default function SignIn({ navigation }) {
         </FooterView>
       </Content>
 
-      <FullscreenActivityIndicator isVisible={state.isAuthenticating} />
+      <FullscreenActivityIndicator isVisible={isAuthenticating} />
     </SafeAreaView>
   );
 }
