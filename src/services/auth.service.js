@@ -13,7 +13,8 @@ export const useAuthService = () => {
     const user = data[0];
 
     if (!token || !user) {
-      throw new Error('Api response error');
+      // eslint-disable-next-line prettier/prettier
+      throw new Error('Api response error: the api response didn\'t match the expected pattern');
     }
 
     return { token, user };

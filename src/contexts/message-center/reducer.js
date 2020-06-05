@@ -4,7 +4,7 @@ export const actionTypes = {
 
 export function messageCenterContexReducer(state, action) {
   switch (action.type) {
-    case actionTypes.messages:
+    case actionTypes.DISPATCH_MESSAGE:
       return {
         ...state,
         messages: [...state.messages, action.payload.message],

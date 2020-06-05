@@ -5,5 +5,6 @@ export const QuestioneApiResources = {
   signIn: '/login',
   signUp: '/register',
 
-  userEvaluations: '/evaluation/student/result/evaluations',
+  studentEvaluations: ({ page = 1 }) =>
+    `/evaluation/student/result/evaluations?page=${page}`,
 };

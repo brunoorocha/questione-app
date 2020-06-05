@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BaseView,
   SafeAreaView,
@@ -8,7 +8,11 @@ import {
 import { SearchView } from './styles';
 import { routesNames } from '../../routes/routesNames';
 
-export default function AnsweredTests({ navigation }) {
+export default function AnsweredTests({
+  navigation,
+  evaluations = [],
+  getEvaluations = () => {},
+}) {
   const answeredTests = [
     {
       id: 1,
@@ -24,6 +28,11 @@ export default function AnsweredTests({ navigation }) {
       isFinished: true,
     },
   ];
+
+  useEffect(() => {
+    getEvaluations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSelectTest = (test) => {
     navigation.push(routesNames.testDetails);
