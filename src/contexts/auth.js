@@ -25,7 +25,8 @@ export const AuthProvider = ({ children }) => {
     loadStoragedData();
 
     return () => (canUpdate = false);
-  }, [asyncStorage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const signIn = async ({ email, password }) => {
     try {

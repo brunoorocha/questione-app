@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
 import {
   Heading1,
@@ -6,6 +6,8 @@ import {
   HomeCardMenu,
   HomeCard,
   MoreButton,
+  ActionSheet,
+  ActionSheetItem,
   colors,
 } from '../../components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -21,6 +23,7 @@ import { useAuthContext } from '../../contexts/auth';
 Icon.loadFont();
 
 export default function Home({ navigation }) {
+  const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
   const { user, signOut } = useAuthContext();
 
   const formattedUserName = (name) => {
@@ -37,7 +40,11 @@ export default function Home({ navigation }) {
   };
 
   const onPressMoreButton = () => {
-    onPressSignOutButton();
+    setIsActionSheetOpen(true);
+  };
+
+  const onPressActionSheetCancelButton = () => {
+    setIsActionSheetOpen(false);
   };
 
   const onPressSignOutButton = () => {
@@ -76,6 +83,17 @@ export default function Home({ navigation }) {
           onPress={onPressDoTest}
         />
       </HomeCardMenu>
+
+      <ActionSheet
+        isOpen={isActionSheetOpen}
+        onPressCancel={onPressActionSheetCancelButton}>
+        <ActionSheetItem
+          title="Sair da prova"
+          type="destructive"
+          onPress={onPressSignOutButton}
+          icon={<Icon name="exit-to-app" size={20} color={colors.red} />}
+        />
+      </ActionSheet>
     </ContentView>
   );
 }
