@@ -13,21 +13,21 @@ export default function AnsweredTests({
   evaluations = [],
   getEvaluations = () => {},
 }) {
-  const answeredTests = [
-    {
-      id: 1,
-      description:
-        'Avaliação N1 (Modelos de Processo) Engenharia de Software 2019.2 Convencional',
-      date: '20/02/2020',
-      isFinished: false,
-    },
-    {
-      id: 2,
-      description: 'Avaliação Semestral BSI 1º Semestre 2019.2 Regular',
-      date: '01/12/2019',
-      isFinished: true,
-    },
-  ];
+  // const answeredTests = [
+  //   {
+  //     id: 1,
+  //     description:
+  //       'Avaliação N1 (Modelos de Processo) Engenharia de Software 2019.2 Convencional',
+  //     date: '20/02/2020',
+  //     isFinished: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     description: 'Avaliação Semestral BSI 1º Semestre 2019.2 Regular',
+  //     date: '01/12/2019',
+  //     isFinished: true,
+  //   },
+  // ];
 
   useEffect(() => {
     getEvaluations();
@@ -45,7 +45,7 @@ export default function AnsweredTests({
           <SearchField placeholder="Pesquisar avaliação" />
         </SearchView>
 
-        <TestFlatList tests={answeredTests} onSelect={onSelectTest} />
+        <TestFlatList tests={evaluations} onSelect={onSelectTest} />
       </SafeAreaView>
     </BaseView>
   );

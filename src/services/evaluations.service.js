@@ -1,5 +1,6 @@
 import { useQuestioneApiService } from './api/api.service';
 import { QuestioneApiResources } from './api/QuestioneApiResources';
+import { transformEvaluationFromApi } from '../utils/transformEvaluationFromApi';
 
 export const useEvaluationService = () => {
   const service = useQuestioneApiService();
@@ -15,7 +16,11 @@ export const useEvaluationService = () => {
       throw new Error('Api response error: the api response didn\'t match the expected pattern');
     }
 
-    return evaluations;
+    const transformedEvaluations = evaluations.map((evaluation) => {
+      return transformEvaluationFromApi(evaluation);
+    });
+
+    return transformedEvaluations;
   };
 
   return { getEvaluations };
