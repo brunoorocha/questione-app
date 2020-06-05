@@ -19,7 +19,7 @@ import { useFormErrors } from '../../utils/useFormErrors';
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, isAuthenticating } = useAuthContext();
+  const { signIn, state } = useAuthContext();
 
   const formValidationSchema = yup.object().shape({
     email: yup
@@ -99,7 +99,7 @@ export default function SignIn({ navigation }) {
         </FooterView>
       </Content>
 
-      <FullscreenActivityIndicator isVisible={isAuthenticating} />
+      <FullscreenActivityIndicator isVisible={state.isAuthenticating} />
     </SafeAreaView>
   );
 }

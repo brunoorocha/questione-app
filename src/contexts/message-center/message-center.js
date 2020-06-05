@@ -5,20 +5,8 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-
+import { messageCenterContexReducer, actionTypes } from './reducer';
 const MessageCenter = createContext();
-
-function messageCenterReducer(state, action) {
-  switch (action.type) {
-    case 'dispatch message':
-      return {
-        ...state,
-        messages: [...state.messages, action.payload.message],
-      };
-    default:
-      throw new Error(`Unhandled action type: ${action.type}`);
-  }
-}
 
 export const MessageCenterProvider = ({ children }) => {
   const [index, setIndex] = useState(0);
@@ -30,7 +18,8 @@ export const MessageCenterProvider = ({ children }) => {
     messages: [],
   };
 
-  const [state, dispatch] = useReducer(messageCenterReducer, initialState);
+  // eslint-disable-next-line prettier/prettier
+  const [state, dispatch] = useReducer(messageCenterContexReducer, initialState);
 
   useEffect(() => {
     const currentMessage = state.messages[index];
@@ -62,7 +51,10 @@ export const MessageCenterProvider = ({ children }) => {
 
   const dispatchMessage = ({ text, duration = 3000 }) => {
     const newMessage = { text, duration };
-    dispatch({ type: 'dispatch message', payload: { message: newMessage } });
+    dispatch({
+      type: actionTypes.DISPATCH_MESSAGE,
+      payload: { message: newMessage },
+    });
     setIsRunning(true);
   };
 

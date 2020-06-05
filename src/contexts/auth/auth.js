@@ -1,15 +1,19 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useAsyncStorage } from '../services/async-storage.service';
-import { useAuthService } from '../services/auth.service';
-import { useMessageCenterContext } from './message-center';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { useAsyncStorage } from '../../services/async-storage.service';
+import { useAuthService } from '../../services/auth.service';
+import { useMessageCenterContext } from '../message-center';
+import { authContextReducer, actionTypes } from './reducer';
 
 export const AuthProvider = ({ children }) => {
   const authService = useAuthService();
   const asyncStorage = useAsyncStorage();
-  const [user, setUser] = useState(undefined);
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const [authenticationError, setAuthenticationError] = useState(undefined);
   const { dispatchMessage } = useMessageCenterContext();
+  const initialState = {
+    user: undefined,
+    isAuthenticating: false,
+  };
+
+  const [state, dipatch] = useReducer(authContextReducer, initialState);
 
   useEffect(() => {
     let canUpdate = true;
@@ -18,59 +22,63 @@ export const AuthProvider = ({ children }) => {
       const storagedToken = await asyncStorage.getToken();
 
       if (storagedUserData && storagedToken && canUpdate) {
-        setUser(storagedUserData);
+        dipatch({
+          type: actionTypes.SET_USER,
+          payload: { user: storagedUserData },
+        });
       }
     };
 
     loadStoragedData();
-
     return () => (canUpdate = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signIn = async ({ email, password }) => {
     try {
-      setIsAuthenticating(true);
+      dipatch({ type: actionTypes.AUTHENTICATION_START });
       // eslint-disable-next-line prettier/prettier
       const { user: userData, token } = await authService.signIn({ email, password });
-      setUser(userData);
+      dipatch({
+        type: actionTypes.SET_USER,
+        payload: { user: userData },
+      });
 
       await asyncStorage.setToken(token);
       await asyncStorage.setUser(userData);
     } catch (error) {
       dispatchMessage({ text: error.message });
     } finally {
-      setAuthenticationError(undefined);
-      setIsAuthenticating(false);
+      dipatch({ type: actionTypes.AUTHENTICATION_END });
     }
   };
 
   const signUp = async ({ name, cpf, email, password }) => {
     try {
-      setIsAuthenticating(true);
+      dipatch({ type: actionTypes.AUTHENTICATION_START });
       await authService.signUp({ name, cpf, email, password });
       signIn({ email, password });
     } catch (error) {
-      setAuthenticationError(error);
+      dispatchMessage({ text: error.message });
     } finally {
-      setAuthenticationError(undefined);
-      setIsAuthenticating(false);
+      dipatch({ type: actionTypes.AUTHENTICATION_END });
     }
   };
 
   const signOut = async () => {
     await asyncStorage.clearStorage();
     authService.signOut();
-    setUser(undefined);
+    dipatch({
+      type: actionTypes.SET_USER,
+      payload: { user: undefined },
+    });
   };
 
   return (
     <AuthContext.Provider
       value={{
-        isUserAuthenticated: !!user,
-        isAuthenticating,
-        authenticationError,
-        user,
+        isUserAuthenticated: !!state.user,
+        state,
         signIn,
         signUp,
         signOut,

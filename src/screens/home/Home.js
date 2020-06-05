@@ -18,13 +18,13 @@ import {
   GreetingView,
 } from './styles';
 import { routesNames } from '../../routes/routesNames';
-import { useAuthContext } from '../../contexts/auth';
+import { useAuthContext } from '../../contexts/auth/auth';
 
 Icon.loadFont();
 
 export default function Home({ navigation }) {
   const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
-  const { user, signOut } = useAuthContext();
+  const { state, signOut } = useAuthContext();
 
   const formattedUserName = (name) => {
     const [firstName, secondName] = name.split(' ');
@@ -65,7 +65,7 @@ export default function Home({ navigation }) {
         <GreetingView>
           <Heading3 color={colors.white}>Olá,</Heading3>
           <Heading1 color={colors.white}>
-            {user.name ? formattedUserName(user.name) : ''}
+            {state.user.name ? formattedUserName(state.user.name) : ''}
           </Heading1>
         </GreetingView>
       </HeaderView>
