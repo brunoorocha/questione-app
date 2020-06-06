@@ -14,7 +14,7 @@ export const ActivityIndicatorFullScreenView = styled.View`
 export const ActivityIndicatorView = styled.View`
   flex: 1;
   background-color: ${colors.white};
-  padding: 16px 0px;
+  padding: 40px 0px;
   justify-content: ${(props) => (props.alignCenter ? 'center' : 'flex-start')};
   align-items: center;
 `;
