@@ -1,7 +1,11 @@
-<div align="center" style="padding: 40px 0px 30px 0px;">
+<br />
+<div align="center">
   <img src="https://res.cloudinary.com/dqsc6ryot/image/upload/v1591447349/projects/questione-logo.png" />
 </div>
-<div align="center" style="padding: 0px 0px 20px 0px;">
+
+<br />
+<br />
+<div align="center">
   
   <img src="https://img.shields.io/github/last-commit/brunoorocha/questione-app?style=flat-square" />
 
