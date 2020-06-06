@@ -7,7 +7,7 @@ export const transformEvaluationFromApi = (evaluation) => {
     applicationDate: evaluation.evaluation_application?.created_at
       ? new Date(
           evaluation.evaluation_application?.created_at,
-        ).toLocaleDateString()
+        ).toLocaleDateString('pt-BR')
       : undefined,
   };
 };

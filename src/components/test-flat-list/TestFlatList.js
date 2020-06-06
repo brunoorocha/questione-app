@@ -1,8 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import { TestCard } from './TestCard';
+import { ActivityIndicator } from '../activity-indicator/ActivityIndicator';
 
-export const TestFlatList = ({ tests, onSelect }) => {
+export const TestFlatList = ({ tests, onSelect, isLoading }) => {
+  const isEmpty = tests?.lenght === 0;
+
   const _onSelect = (test) => {
     if (onSelect) {
       onSelect(test);
@@ -14,7 +17,9 @@ export const TestFlatList = ({ tests, onSelect }) => {
     paddingRight: 16,
   };
 
-  return (
+  return isLoading ? (
+    <ActivityIndicator isVisible={isLoading} />
+  ) : (
     <FlatList
       data={tests}
       keyExtractor={(item) => `${item.id}`}

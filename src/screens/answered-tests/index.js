@@ -14,12 +14,12 @@ export default function AnsweredTestsContainerWithEvaluationsContext(props) {
 }
 
 const AnsweredTestsContainer = (props) => {
-  const { evaluations, getEvaluations } = useEvaluationContext();
-  return (
-    <AnsweredTests
-      {...props}
-      evaluations={evaluations}
-      getEvaluations={getEvaluations}
-    />
-  );
+  const {
+    evaluations,
+    getEvaluations,
+    isLoadingEvaluations,
+  } = useEvaluationContext();
+  const contextProps = { evaluations, getEvaluations, isLoadingEvaluations };
+
+  return <AnsweredTests {...props} {...contextProps} />;
 };
