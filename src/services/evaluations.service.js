@@ -1,6 +1,7 @@
 import { useQuestioneApiService } from './api/api.service';
 import { QuestioneApiResources } from './api/QuestioneApiResources';
 import { transformEvaluationFromApi } from '../utils/transformEvaluationFromApi';
+import { transformQuestionResultFromApi } from '../utils/transformQuestionResultFromApi';
 
 export const useEvaluationService = () => {
   const service = useQuestioneApiService();
@@ -32,9 +33,8 @@ export const useEvaluationService = () => {
     const resource = QuestioneApiResources.evaluationResult({ evaluationId });
     const { data } = await service.get(resource);
 
-    const result = data;
-
-    return { result };
+    const transformedResult = transformQuestionResultFromApi(data);
+    return { result: transformedResult };
   };
 
   return { getEvaluations, getEvaluationResult };

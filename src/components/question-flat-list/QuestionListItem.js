@@ -33,7 +33,7 @@ const StateCheckmark = styled.View`
 export const QuestionItemState = {
   notAnswered: 'notAnswered',
   answered: 'answered',
-  right: 'right',
+  correct: 'correct',
   wrong: 'wrong',
 };
 
@@ -50,7 +50,7 @@ export const QuestionListItem = ({ title, state, onPress, isSelectable }) => {
       icon: <Icon name="check" size={18} color={colors.white} />,
       color: colors.primaryColor,
     },
-    right: {
+    correct: {
       icon: <Icon name="check" size={18} color={colors.white} />,
       color: colors.green,
     },
