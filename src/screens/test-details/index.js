@@ -4,5 +4,11 @@ import { useEvaluationContext } from '../../contexts/evaluation';
 
 export default function TestDetailsContainer(props) {
   const { state } = useEvaluationContext();
-  return <TestDetails {...props} evaluation={state.selectedEvaluation} />;
+  return (
+    <TestDetails
+      {...props}
+      evaluation={state.selectedEvaluation}
+      isLoadingEvaluationResult={state.isLoadingSelectedEvaluationResult}
+    />
+  );
 }

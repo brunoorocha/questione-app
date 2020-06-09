@@ -7,8 +7,9 @@ export const useEvaluationService = () => {
 
   const getEvaluations = async (params = { page: 1 }) => {
     const { page } = params;
-    // eslint-disable-next-line prettier/prettier
-    const { data } = await service.get(QuestioneApiResources.studentEvaluations({ page }));
+    const resource = QuestioneApiResources.studentEvaluations({ page });
+
+    const { data } = await service.get(resource);
     const evaluations = data.data;
 
     if (!evaluations) {
@@ -23,5 +24,18 @@ export const useEvaluationService = () => {
     return transformedEvaluations;
   };
 
-  return { getEvaluations };
+  const getEvaluationResult = async ({ evaluationId }) => {
+    if (!evaluationId) {
+      throw new Error('The evaluationId param cannot be undefined or null');
+    }
+
+    const resource = QuestioneApiResources.evaluationResult({ evaluationId });
+    const { data } = await service.get(resource);
+
+    const result = data;
+
+    return { result };
+  };
+
+  return { getEvaluations, getEvaluationResult };
 };

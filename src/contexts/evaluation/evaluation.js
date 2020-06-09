@@ -7,9 +7,10 @@ const EvaluationContext = createContext();
 
 export const EvaluationContextProvider = ({ children }) => {
   const initialState = {
-    selectedEvaluation: undefined,
     evaluations: [],
+    selectedEvaluation: undefined,
     isLoadingEvaluations: false,
+    isLoadingSelectedEvaluationResult: false,
   };
 
   const [state, dispatch] = useReducer(evaluationContextReducer, initialState);
@@ -28,11 +29,27 @@ export const EvaluationContextProvider = ({ children }) => {
     }
   };
 
-  const setSelectedEvaluation = ({ evaluation }) => {
+  const setSelectedEvaluation = async ({ evaluation }) => {
     dispatch({
       type: actionTypes.SET_SELECTED_EVALUATION,
       payload: { selectedEvaluation: { ...evaluation } },
     });
+
+    try {
+      dispatch({ type: actionTypes.LOAD_SELECTED_EVALUATION_RESULT_START });
+      const { result } = await evaluationService.getEvaluationResult({
+        evaluationId: evaluation.id,
+      });
+
+      dispatch({
+        type: actionTypes.SET_SELECTED_EVALUATION_RESULT,
+        payload: { result },
+      });
+    } catch (error) {
+      dispatchMessage({ text: error.message });
+    } finally {
+      dispatch({ type: actionTypes.LOAD_SELECTED_EVALUATION_RESULT_END });
+    }
   };
 
   return (

@@ -19,7 +19,11 @@ import { routesNames } from '../../routes/routesNames';
 
 Icon.loadFont();
 
-export default function TestDetails({ navigation, evaluation }) {
+export default function TestDetails({
+  navigation,
+  evaluation,
+  isLoadingEvaluationResult,
+}) {
   const onPressSeeAnswersButton = () => {
     navigation.push(routesNames.answers);
   };
@@ -50,9 +54,17 @@ export default function TestDetails({ navigation, evaluation }) {
           <Heading4>Resultado individual</Heading4>
           {evaluation.resultsAvailable ? (
             <ResultsView>
-              <NumberCard number={7} label="Questões certas" />
+              <NumberCard
+                number={evaluation.result?.qtdCorrect ?? 0}
+                label="Questões certas"
+                isLoading={isLoadingEvaluationResult}
+              />
               <HorizontalSpacer />
-              <NumberCard number={3} label="Questões erradas" />
+              <NumberCard
+                number={evaluation.result?.qtdIncorrect ?? 0}
+                label="Questões erradas"
+                isLoading={isLoadingEvaluationResult}
+              />
             </ResultsView>
           ) : (
             <Paragraph>Os resultados ainda não foram liberados</Paragraph>

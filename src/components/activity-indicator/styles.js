@@ -18,3 +18,14 @@ export const ActivityIndicatorView = styled.View`
   justify-content: ${(props) => (props.alignCenter ? 'center' : 'flex-start')};
   align-items: center;
 `;
+
+export const RowSkelectonView = styled.View`
+  width: 100%;
+  height: 16px;
+  margin-bottom: 4px;
+`;
+
+export const NumberSkelectonView = styled.View`
+  width: 40px
+  height: 32px;
+`;

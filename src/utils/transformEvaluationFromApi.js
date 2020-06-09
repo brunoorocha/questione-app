@@ -5,6 +5,7 @@ export const transformEvaluationFromApi = (evaluation) => {
     code: evaluation.evaluation_application?.id_application,
     isFinished: !!evaluation.finalized_at,
     resultsAvailable: evaluation.evaluation_application?.show_results === 1,
+    result: undefined,
     applicationDescription: evaluation.evaluation_application?.description,
     teacherName: evaluation.evaluation_application?.evaluation?.user?.name,
     applicationDate: evaluation.evaluation_application?.created_at
