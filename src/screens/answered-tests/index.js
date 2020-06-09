@@ -4,15 +4,14 @@ import { useEvaluationContext } from '../../contexts/evaluation';
 
 export default function AnsweredTestsContainer(props) {
   const {
-    evaluations,
+    state,
     getEvaluations,
-    isLoadingEvaluations,
     setSelectedEvaluation,
   } = useEvaluationContext();
   const contextProps = {
-    evaluations,
+    evaluations: state.evaluations,
+    isLoadingEvaluations: state.isLoadingEvaluations,
     getEvaluations,
-    isLoadingEvaluations,
     setSelectedEvaluation,
   };
 

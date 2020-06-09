@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState, useReducer } from 'react';
+import React, { useContext, createContext, useReducer } from 'react';
 import { useEvaluationService } from '../../services/evaluations.service';
 import { useMessageCenterContext } from '../message-center';
 import { actionTypes, evaluationContextReducer } from './reducer';
@@ -6,26 +6,25 @@ import { actionTypes, evaluationContextReducer } from './reducer';
 const EvaluationContext = createContext();
 
 export const EvaluationContextProvider = ({ children }) => {
-  const [evaluations, setEvaluations] = useState([]);
-  const [isLoadingEvaluations, setIsLoadingEvaluations] = useState(false);
-
   const initialState = {
     selectedEvaluation: undefined,
+    evaluations: [],
+    isLoadingEvaluations: false,
   };
-  const [state, dispatch] = useReducer(evaluationContextReducer, initialState);
 
+  const [state, dispatch] = useReducer(evaluationContextReducer, initialState);
   const evaluationService = useEvaluationService();
   const { dispatchMessage } = useMessageCenterContext();
 
   const getEvaluations = async () => {
     try {
-      setIsLoadingEvaluations(true);
-      const evaluationList = await evaluationService.getEvaluations();
-      setEvaluations(evaluationList);
+      dispatch({ type: actionTypes.LOAD_EVALUATIONS_START });
+      const evaluations = await evaluationService.getEvaluations();
+      dispatch({ type: actionTypes.SET_EVALUATIONS, payload: { evaluations } });
     } catch (error) {
       dispatchMessage({ text: error.message });
     } finally {
-      setIsLoadingEvaluations(false);
+      dispatch({ type: actionTypes.LOAD_EVALUATIONS_END });
     }
   };
 
@@ -39,11 +38,9 @@ export const EvaluationContextProvider = ({ children }) => {
   return (
     <EvaluationContext.Provider
       value={{
-        evaluations,
-        getEvaluations,
-        isLoadingEvaluations,
-        setSelectedEvaluation,
         state,
+        getEvaluations,
+        setSelectedEvaluation,
       }}>
       {children}
     </EvaluationContext.Provider>

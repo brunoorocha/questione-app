@@ -9,6 +9,7 @@ import {
 import { HorizontalSpacer } from '../spacer/Spacer';
 import { colors } from '../colors/Colors';
 import { Chip } from '../chips/Chips';
+import { IsFinishedChips } from '../chips/IsFinishedChips';
 
 export const TestCard = ({
   description,
@@ -21,15 +22,7 @@ export const TestCard = ({
   return (
     <TestCardView activeOpacity={0.7} onPress={onPress}>
       <TestCardHeader>
-        {isFinished ? (
-          <Chip
-            title="Finalizada"
-            color={colors.green}
-            titleColor={colors.white}
-          />
-        ) : (
-          <Chip title="Não finalizada" />
-        )}
+        <IsFinishedChips isFinished={isFinished} />
         <HorizontalSpacer size={8} />
         {resultsAvailable && (
           <Chip

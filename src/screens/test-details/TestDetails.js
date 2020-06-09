@@ -6,7 +6,7 @@ import {
   Heading2,
   Heading4,
   Paragraph,
-  Chip,
+  IsFinishedChips,
   VerticalSpacer,
   SecondaryButton,
   NumberCard,
@@ -29,15 +29,7 @@ export default function TestDetails({ navigation, evaluation }) {
       <SafeAreaView>
         <Content>
           <HeaderView>
-            {evaluation.isFinished ? (
-              <Chip
-                title="Finalizada"
-                color={colors.green}
-                titleColor={colors.white}
-              />
-            ) : (
-              <Chip title="Não finalizada" />
-            )}
+            <IsFinishedChips isFinished={evaluation.isFinished} />
             <VerticalSpacer />
 
             <Heading2>{evaluation?.description}</Heading2>

@@ -19,6 +19,7 @@ export * from './action-sheet/ActionSheet';
 export * from './rating/Rating';
 export * from './test-flat-list/TestFlatList';
 export * from './chips/Chips';
+export * from './chips/IsFinishedChips';
 export * from './number-card/NumberCard';
 export * from './search-field/SeachField';
 export * from './activity-indicator/FullscreenActivityIndicator';
