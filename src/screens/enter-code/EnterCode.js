@@ -9,7 +9,11 @@ import {
 import { EnterCodeView, CodeTextField, FooterView, Content } from './styles';
 import { routesNames } from '../../routes/routesNames';
 
-export default function EnterCode({ navigation }) {
+export default function EnterCode({
+  navigation,
+  isLoadingEvaluationQuestions,
+  startEvaluation = () => {},
+}) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [evaluationCode, setEvaluationCode] = useState('');
 
@@ -35,8 +39,10 @@ export default function EnterCode({ navigation }) {
   };
 
   const onPressParticipate = () => {
-    navigation.push(routesNames.question);
     textFieldRef.blur();
+    startEvaluation({ evaluationCode }).then(() => {
+      navigation.push(routesNames.question);
+    });
   };
 
   return (
@@ -64,7 +70,7 @@ export default function EnterCode({ navigation }) {
         </FooterView>
       </Content>
 
-      <FullscreenActivityIndicator isVisible={false} />
+      <FullscreenActivityIndicator isVisible={isLoadingEvaluationQuestions} />
     </BaseView>
   );
 }

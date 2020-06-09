@@ -43,7 +43,7 @@ export const useEvaluationService = () => {
     }
 
     const resource = QuestioneApiResources.startEvaluation({ evaluationCode });
-    const { data } = await service.get(resource);
+    const { data } = await service.post(resource);
     const questions = data;
 
     return { questions };
