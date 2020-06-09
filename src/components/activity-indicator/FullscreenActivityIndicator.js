@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Animated, Dimensions } from 'react-native';
-import { ActivityIndicatorView } from './styles';
+import { ActivityIndicatorFullScreenView } from './styles';
 import { colors } from '../colors/Colors';
 
 export const FullscreenActivityIndicator = ({ isVisible }) => {
   const [animation] = useState(new Animated.Value(0));
   // eslint-disable-next-line prettier/prettier
-  const AnimatedActivityIndicatorView = Animated.createAnimatedComponent(ActivityIndicatorView);
+  const AnimatedActivityIndicatorView = Animated.createAnimatedComponent(ActivityIndicatorFullScreenView);
   const windowHeight = Dimensions.get('window').height;
 
   const animatedStyles = {

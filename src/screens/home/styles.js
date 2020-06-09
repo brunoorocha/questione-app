@@ -2,14 +2,14 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { colors } from '../../components';
 
-export const ContentView = styled.View`
+export const ContentView = styled.ScrollView`
   flex: 1;
   background-color: ${colors.white};
 `;
 
 export const HeaderView = styled.View`
   background-color: ${colors.primaryColor};
-  padding: ${Platform.OS === 'ios' ? '40px' : '8px'} 0px 40px 0px;
+  padding: ${Platform.OS === 'ios' ? '32px' : '8px'} 0px 40px 0px;
   height: 240px;
   justify-content: flex-end;
 `;

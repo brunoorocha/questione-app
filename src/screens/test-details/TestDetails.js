@@ -6,7 +6,7 @@ import {
   Heading2,
   Heading4,
   Paragraph,
-  Chip,
+  IsFinishedChips,
   VerticalSpacer,
   SecondaryButton,
   NumberCard,
@@ -19,7 +19,11 @@ import { routesNames } from '../../routes/routesNames';
 
 Icon.loadFont();
 
-export default function TestDetails({ navigation }) {
+export default function TestDetails({
+  navigation,
+  evaluation,
+  isLoadingEvaluationResult,
+}) {
   const onPressSeeAnswersButton = () => {
     navigation.push(routesNames.answers);
   };
@@ -29,41 +33,58 @@ export default function TestDetails({ navigation }) {
       <SafeAreaView>
         <Content>
           <HeaderView>
-            <Chip
-              title="Finalizada"
-              color={colors.green}
-              titleColor={colors.white}
-            />
+            <IsFinishedChips isFinished={evaluation.isFinished} />
             <VerticalSpacer />
-            <Heading2>
-              Avaliação Semestral BSI 1º Semestre 2019.2 Regular
-            </Heading2>
+
+            <Heading2>{evaluation?.description}</Heading2>
           </HeaderView>
 
+          <Heading4>Descrição da aplicação</Heading4>
+          <Paragraph>{evaluation?.applicationDescription}</Paragraph>
+          <VerticalSpacer />
+
+          <Heading4>Aplicada por</Heading4>
+          <Paragraph>{evaluation?.teacherName}</Paragraph>
+          <VerticalSpacer />
+
           <Heading4>Data de aplicação</Heading4>
-          <Paragraph>01/12/2019</Paragraph>
+          <Paragraph>{evaluation?.applicationDate}</Paragraph>
           <VerticalSpacer />
 
           <Heading4>Resultado individual</Heading4>
-          <ResultsView>
-            <NumberCard number={7} label="Questões certas" />
-            <HorizontalSpacer />
-            <NumberCard number={3} label="Questões erradas" />
-          </ResultsView>
+          {evaluation.resultsAvailable ? (
+            <ResultsView>
+              <NumberCard
+                number={evaluation.result?.correctAnswers ?? 0}
+                label="Questões certas"
+                isLoading={isLoadingEvaluationResult}
+              />
+              <HorizontalSpacer />
+              <NumberCard
+                number={evaluation.result?.wrongAnswers ?? 0}
+                label="Questões erradas"
+                isLoading={isLoadingEvaluationResult}
+              />
+            </ResultsView>
+          ) : (
+            <Paragraph>Os resultados ainda não foram liberados</Paragraph>
+          )}
 
-          <FooterView>
-            <SecondaryButton
-              onPress={onPressSeeAnswersButton}
-              icon={
-                <Icon
-                  name="format-list-bulleted"
-                  size={20}
-                  color={colors.textColor}
-                />
-              }>
-              Visualizar gabarito
-            </SecondaryButton>
-          </FooterView>
+          {evaluation.resultsAvailable && (
+            <FooterView>
+              <SecondaryButton
+                onPress={onPressSeeAnswersButton}
+                icon={
+                  <Icon
+                    name="format-list-bulleted"
+                    size={20}
+                    color={colors.textColor}
+                  />
+                }>
+                Visualizar respostas
+              </SecondaryButton>
+            </FooterView>
+          )}
         </Content>
       </SafeAreaView>
     </BaseView>

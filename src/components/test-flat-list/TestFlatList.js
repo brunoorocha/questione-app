@@ -21,8 +21,10 @@ export const TestFlatList = ({ tests, onSelect }) => {
       renderItem={({ item }) => (
         <TestCard
           description={item.description}
-          date={item.date}
+          date={item.applicationDate}
           isFinished={item.isFinished}
+          teacherName={item.teacherName}
+          resultsAvailable={item.resultsAvailable}
           onPress={() => {
             _onSelect(item);
           }}
