@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
-import { Heading3, ForwardButton, BaseView } from '../../components';
+import {
+  Heading3,
+  ForwardButton,
+  BaseView,
+  FullscreenActivityIndicator,
+} from '../../components';
 import { EnterCodeView, CodeTextField, FooterView, Content } from './styles';
 import { routesNames } from '../../routes/routesNames';
 
 export default function EnterCode({ navigation }) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [evaluationCode, setEvaluationCode] = useState('');
+
   let textFieldRef;
 
   useEffect(() => {
@@ -42,13 +49,22 @@ export default function EnterCode({ navigation }) {
             ref={(input) => {
               textFieldRef = input;
             }}
+            onChangeText={(text) => {
+              setEvaluationCode(text);
+            }}
           />
         </EnterCodeView>
 
         <FooterView bottom={keyboardHeight}>
-          <ForwardButton onPress={onPressParticipate}>Participar</ForwardButton>
+          <ForwardButton
+            isDisabled={evaluationCode.length === 0}
+            onPress={onPressParticipate}>
+            Participar
+          </ForwardButton>
         </FooterView>
       </Content>
+
+      <FullscreenActivityIndicator isVisible={false} />
     </BaseView>
   );
 }

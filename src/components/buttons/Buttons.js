@@ -92,10 +92,13 @@ export const SecondaryButton = ({ children, onPress, icon }) => (
   </SecondaryButtonWrapper>
 );
 
-export const ForwardButton = (props) => (
-  <PrimaryButtonWrapper onPress={props.onPress} activeOpacity={0.7}>
+export const ForwardButton = ({ onPress, isDisabled, children }) => (
+  <PrimaryButtonWrapper
+    onPress={onPress}
+    activeOpacity={0.7}
+    disabled={isDisabled}>
     <ButtonText color={colors.white} marginLeft={16}>
-      {props.children}
+      {children}
     </ButtonText>
 
     <ForwardButtonIcon>

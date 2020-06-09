@@ -86,7 +86,7 @@ export default function Home({ navigation, user, signOut }) {
         isOpen={isActionSheetOpen}
         onPressCancel={onPressActionSheetCancelButton}>
         <ActionSheetItem
-          title="Sair da prova"
+          title="Fazer logout"
           type="destructive"
           onPress={onPressSignOutButton}
           icon={<Icon name="exit-to-app" size={20} color={colors.red} />}

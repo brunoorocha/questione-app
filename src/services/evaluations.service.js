@@ -37,5 +37,17 @@ export const useEvaluationService = () => {
     return { result: transformedResult };
   };
 
-  return { getEvaluations, getEvaluationResult };
+  const startEvaluation = async ({ evaluationCode }) => {
+    if (!evaluationCode) {
+      throw new Error('The evaluationCode param cannot be undefined or null');
+    }
+
+    const resource = QuestioneApiResources.startEvaluation({ evaluationCode });
+    const { data } = await service.get(resource);
+    const questions = data;
+
+    return { questions };
+  };
+
+  return { getEvaluations, getEvaluationResult, startEvaluation };
 };

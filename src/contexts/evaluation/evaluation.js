@@ -8,8 +8,10 @@ const EvaluationContext = createContext();
 export const EvaluationContextProvider = ({ children }) => {
   const initialState = {
     evaluations: [],
+    evaluationQuestions: [],
     selectedEvaluation: undefined,
     isLoadingEvaluations: false,
+    isLoadingEvaluationQuestions: false,
     isLoadingSelectedEvaluationResult: false,
   };
 
@@ -52,12 +54,31 @@ export const EvaluationContextProvider = ({ children }) => {
     }
   };
 
+  const startEvaluation = async ({ evaluationCode }) => {
+    try {
+      dispatch({ type: actionTypes.LOAD_EVALUATION_QUESTIONS_START });
+      const { questions } = await evaluationService.startEvaluation({
+        evaluationCode,
+      });
+
+      dispatch({
+        type: actionTypes.SET_EVALUATION_QUESTIONS,
+        payload: { questions },
+      });
+    } catch (error) {
+      dispatchMessage({ text: error.message });
+    } finally {
+      dispatch({ type: actionTypes.LOAD_EVALUATION_QUESTIONS_END });
+    }
+  };
+
   return (
     <EvaluationContext.Provider
       value={{
         state,
         getEvaluations,
         setSelectedEvaluation,
+        startEvaluation,
       }}>
       {children}
     </EvaluationContext.Provider>

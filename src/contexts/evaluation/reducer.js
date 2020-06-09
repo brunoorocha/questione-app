@@ -1,9 +1,15 @@
 export const actionTypes = {
   SET_SELECTED_EVALUATION: 'SET_SELECTED_EVALUATION',
+
   SET_SELECTED_EVALUATION_RESULT: 'SET_SELECTED_EVALUATION_RESULT',
   LOAD_SELECTED_EVALUATION_RESULT_START:
     'LOAD_SELECTED_EVALUATION_RESULT_START',
   LOAD_SELECTED_EVALUATION_RESULT_END: 'LOAD_SELECTED_EVALUATION_RESULT_END',
+
+  LOAD_EVALUATION_QUESTIONS_START: 'LOAD_EVALUATION_QUESTIONS_START',
+  LOAD_EVALUATION_QUESTIONS_END: 'LOAD_EVALUATION_QUESTIONS_END',
+  SET_EVALUATION_QUESTIONS: 'SET_EVALUATION_QUESTIONS',
+
   LOAD_EVALUATIONS_START: 'LOAD_EVALUATIONS_START',
   LOAD_EVALUATIONS_END: 'LOAD_EVALUATIONS_END',
   SET_EVALUATIONS: 'SET_EVALUATIONS',
@@ -36,6 +42,24 @@ export function evaluationContextReducer(state, action) {
       return {
         ...state,
         isLoadingSelectedEvaluationResult: false,
+      };
+
+    case actionTypes.LOAD_EVALUATION_QUESTIONS_START:
+      return {
+        ...state,
+        isLoadingEvaluationQuestions: true,
+      };
+
+    case actionTypes.LOAD_EVALUATION_QUESTIONS_END:
+      return {
+        ...state,
+        isLoadingEvaluationQuestions: false,
+      };
+
+    case actionTypes.SET_EVALUATION_QUESTIONS:
+      return {
+        ...state,
+        evaluationQuestions: [...action.payload.questions],
       };
 
     case actionTypes.SET_EVALUATIONS:

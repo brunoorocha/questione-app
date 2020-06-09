@@ -9,4 +9,6 @@ export const QuestioneApiResources = {
     `/evaluation/student/result/evaluations?page=${page}`,
   evaluationResult: ({ evaluationId }) =>
     `/evaluation/student/result/evaluations-specific/${evaluationId}`,
+  startEvaluation: ({ evaluationCode }) =>
+    `/evaluation/start/${evaluationCode}`,
 };
