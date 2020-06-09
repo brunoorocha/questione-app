@@ -19,7 +19,7 @@ import { routesNames } from '../../routes/routesNames';
 
 Icon.loadFont();
 
-export default function TestDetails({ navigation }) {
+export default function TestDetails({ navigation, evaluation }) {
   const onPressSeeAnswersButton = () => {
     navigation.push(routesNames.answers);
   };
@@ -29,27 +29,42 @@ export default function TestDetails({ navigation }) {
       <SafeAreaView>
         <Content>
           <HeaderView>
-            <Chip
-              title="Finalizada"
-              color={colors.green}
-              titleColor={colors.white}
-            />
+            {evaluation.isFinished ? (
+              <Chip
+                title="Finalizada"
+                color={colors.green}
+                titleColor={colors.white}
+              />
+            ) : (
+              <Chip title="Não finalizada" />
+            )}
             <VerticalSpacer />
-            <Heading2>
-              Avaliação Semestral BSI 1º Semestre 2019.2 Regular
-            </Heading2>
+
+            <Heading2>{evaluation?.description}</Heading2>
           </HeaderView>
 
+          <Heading4>Aplicada por</Heading4>
+          <Paragraph>{evaluation?.teacherName}</Paragraph>
+          <VerticalSpacer />
+
+          <Heading4>Descrição da aplicação</Heading4>
+          <Paragraph>{evaluation?.applicationDescription}</Paragraph>
+          <VerticalSpacer />
+
           <Heading4>Data de aplicação</Heading4>
-          <Paragraph>01/12/2019</Paragraph>
+          <Paragraph>{evaluation?.applicationDate}</Paragraph>
           <VerticalSpacer />
 
           <Heading4>Resultado individual</Heading4>
-          <ResultsView>
-            <NumberCard number={7} label="Questões certas" />
-            <HorizontalSpacer />
-            <NumberCard number={3} label="Questões erradas" />
-          </ResultsView>
+          {evaluation.resultsAvailable ? (
+            <ResultsView>
+              <NumberCard number={7} label="Questões certas" />
+              <HorizontalSpacer />
+              <NumberCard number={3} label="Questões erradas" />
+            </ResultsView>
+          ) : (
+            <Paragraph>Os resultados ainda não foram liberados</Paragraph>
+          )}
 
           <FooterView>
             <SecondaryButton

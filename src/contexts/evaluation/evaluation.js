@@ -1,12 +1,18 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, { useContext, createContext, useState, useReducer } from 'react';
 import { useEvaluationService } from '../../services/evaluations.service';
 import { useMessageCenterContext } from '../message-center';
+import { actionTypes, evaluationContextReducer } from './reducer';
 
 const EvaluationContext = createContext();
 
 export const EvaluationContextProvider = ({ children }) => {
   const [evaluations, setEvaluations] = useState([]);
   const [isLoadingEvaluations, setIsLoadingEvaluations] = useState(false);
+
+  const initialState = {
+    selectedEvaluation: undefined,
+  };
+  const [state, dispatch] = useReducer(evaluationContextReducer, initialState);
 
   const evaluationService = useEvaluationService();
   const { dispatchMessage } = useMessageCenterContext();
@@ -23,9 +29,22 @@ export const EvaluationContextProvider = ({ children }) => {
     }
   };
 
+  const setSelectedEvaluation = ({ evaluation }) => {
+    dispatch({
+      type: actionTypes.SET_SELECTED_EVALUATION,
+      payload: { selectedEvaluation: { ...evaluation } },
+    });
+  };
+
   return (
     <EvaluationContext.Provider
-      value={{ evaluations, getEvaluations, isLoadingEvaluations }}>
+      value={{
+        evaluations,
+        getEvaluations,
+        isLoadingEvaluations,
+        setSelectedEvaluation,
+        state,
+      }}>
       {children}
     </EvaluationContext.Provider>
   );

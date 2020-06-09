@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../screens/home';
 import AnsweredTests from '../screens/answered-tests';
-import TestDetails from '../screens/test-details/TestDetails';
+import TestDetails from '../screens/test-details';
 import Answers from '../screens/answers/Answers';
 import EvaluationStack from './evaluation.stack';
 import { routesNames } from './routesNames';

@@ -14,6 +14,7 @@ export default function AnsweredTests({
   navigation,
   evaluations = [],
   getEvaluations = () => {},
+  setSelectedEvaluation = () => {},
   isLoadingEvaluations,
 }) {
   const isEmpty = evaluations.length === 0;
@@ -24,6 +25,7 @@ export default function AnsweredTests({
   }, []);
 
   const onSelectTest = (test) => {
+    setSelectedEvaluation({ evaluation: { ...test } });
     navigation.push(routesNames.testDetails);
   };
 
