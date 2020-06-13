@@ -2,6 +2,8 @@ import { useQuestioneApiService } from './api/api.service';
 import { QuestioneApiResources } from './api/QuestioneApiResources';
 import { transformEvaluationFromApi } from '../utils/transformEvaluationFromApi';
 import { transformQuestionResultFromApi } from '../utils/transformQuestionResultFromApi';
+import { transformQuestionFromApi } from '../utils/transformQuestionFromApi';
+import { mockedResponse } from './mocks/startEvaluationMockResponse';
 
 export const useEvaluationService = () => {
   const service = useQuestioneApiService();
@@ -18,9 +20,9 @@ export const useEvaluationService = () => {
       throw new Error('Api response error: the api response didn\'t match the expected pattern');
     }
 
-    const transformedEvaluations = evaluations.map((evaluation) => {
-      return transformEvaluationFromApi(evaluation);
-    });
+    const transformedEvaluations = evaluations.map((evaluation) =>
+      transformEvaluationFromApi(evaluation),
+    );
 
     return transformedEvaluations;
   };
@@ -42,11 +44,14 @@ export const useEvaluationService = () => {
       throw new Error('The evaluationCode param cannot be undefined or null');
     }
 
-    const resource = QuestioneApiResources.startEvaluation({ evaluationCode });
-    const { data } = await service.post(resource);
-    const questions = data;
+    // const resource = QuestioneApiResources.startEvaluation({ evaluationCode });
+    // const { data } = await service.post(resource);
+    const questions = mockedResponse;
+    const transformedQuestions = questions.map((question) =>
+      transformQuestionFromApi(question),
+    );
 
-    return { questions };
+    return { questions: transformedQuestions };
   };
 
   return { getEvaluations, getEvaluationResult, startEvaluation };
