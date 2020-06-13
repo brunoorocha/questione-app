@@ -76,6 +76,10 @@ const htmlRenderProps = {
 };
 
 export const QuestionView = ({ question, onPressAboutQuestionButton }) => {
+  const questionOptions = question.items?.map((item) => (
+    <HTML html={item.description} {...htmlRenderProps} />
+  ));
+
   return (
     <QuestionListItem>
       <Content>
@@ -93,8 +97,10 @@ export const QuestionView = ({ question, onPressAboutQuestionButton }) => {
 
           <Heading4>Enunciado</Heading4>
           <HTML html={question.stem} {...htmlRenderProps} />
+          <VerticalSpacer />
 
-          <RadioGroup options={[]} />
+          <Heading4>Alternativas</Heading4>
+          <RadioGroup options={questionOptions} />
         </QuestionContentView>
 
         <ButtonsView>

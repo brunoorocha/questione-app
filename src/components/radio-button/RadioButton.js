@@ -34,6 +34,11 @@ const RadioBullet = styled.View`
   border-radius: 6px;
 `;
 
+const LabelView = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+
 export const RadioButton = ({ onPress, label, isSelected }) => {
   const [bulletAnimation] = useState(new Animated.Value(0));
   const AnimatedRadioBullet = Animated.createAnimatedComponent(RadioBullet);
@@ -47,6 +52,8 @@ export const RadioButton = ({ onPress, label, isSelected }) => {
       },
     ],
   };
+
+  const _isLabelString = typeof label === 'string';
 
   useEffect(() => {
     Animated.timing(bulletAnimation, {
@@ -64,7 +71,9 @@ export const RadioButton = ({ onPress, label, isSelected }) => {
             <AnimatedRadioBullet style={[animatedRadioBulletStyle]} />
           )}
         </Radio>
-        <Paragraph>{label}</Paragraph>
+        <LabelView>
+          {_isLabelString ? <Paragraph>{label}</Paragraph> : label}
+        </LabelView>
       </RadioButtonWrapper>
     </RadioButtonTouchableWrapper>
   );
