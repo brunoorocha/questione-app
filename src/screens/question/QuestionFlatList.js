@@ -8,7 +8,7 @@ export const QuestionFlatList = ({ questions }) => {
       horizontal={true}
       pagingEnabled={true}
       data={questions}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => `${item.id}`}
       renderItem={({ item }) => <QuestionView question={item} />}
     />
   );

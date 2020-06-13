@@ -47,6 +47,7 @@ export const useEvaluationService = () => {
     // const resource = QuestioneApiResources.startEvaluation({ evaluationCode });
     // const { data } = await service.post(resource);
     const questions = mockedResponse;
+
     const transformedQuestions = questions.map((question) =>
       transformQuestionFromApi(question),
     );

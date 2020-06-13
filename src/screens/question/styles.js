@@ -18,3 +18,8 @@ export const QuestionListItem = styled.View`
   flex: 1;
   width: ${Dimensions.get('window').width}px;
 `;
+
+export const QuestionImageContainer = styled.View`
+  flex: 1;
+  padding: 16px 0px;
+`;
