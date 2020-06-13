@@ -2,7 +2,7 @@ import React from 'react';
 import EnterCode from './EnterCode';
 import { useEvaluationContext } from '../../contexts/evaluation';
 
-export default function TestDetailsContainer(props) {
+export default function EnterCodeContainer(props) {
   const { state, startEvaluation } = useEvaluationContext();
 
   return (

@@ -15,7 +15,7 @@ export default function EnterCode({
   startEvaluation = () => {},
 }) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [evaluationCode, setEvaluationCode] = useState('');
+  const [evaluationCode, setEvaluationCode] = useState('2014215626');
 
   let textFieldRef;
 
@@ -52,6 +52,7 @@ export default function EnterCode({
           <Heading3>Digite o código da avaliação:</Heading3>
           <CodeTextField
             autoFocus={true}
+            value={evaluationCode}
             ref={(input) => {
               textFieldRef = input;
             }}

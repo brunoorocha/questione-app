@@ -19,11 +19,17 @@ import {
 import { QuestionView, ButtonsView, View } from './styles';
 import { routesNames } from '../../routes/routesNames';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import HTML from 'react-native-render-html';
+import { Dimensions, Image } from 'react-native';
 
 Icon.loadFont();
 
-export default function Question({ navigation }) {
+export default function Question({ navigation, questions }) {
   const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
+
+  const baseText =
+    questions[0]?.evaluation_question_without_correct?.question_without_correct
+      ?.base_text;
 
   const questionOptions = [
     'Teste de Aceitação e Teste de Unidade.',
@@ -47,6 +53,37 @@ export default function Question({ navigation }) {
     setIsActionSheetOpen(false);
   };
 
+  const htmlRenderProps = {
+    ignoredTags: [''],
+    ignoredStyles: [
+      'margin',
+      'padding',
+      'font-size',
+      'font-family',
+      'text-align',
+      'display',
+    ],
+    renderers: {
+      img: (htmlAttrs, children, cssStyles, passProps) => {
+        const aspectRatio = htmlAttrs.height / htmlAttrs.width;
+        const newWidth = Dimensions.get('window').width - 32;
+        const newHeight = newWidth * aspectRatio;
+        const imageStyle = { flex: 1, width: newWidth, height: newHeight };
+
+        return (
+          <Image
+            key={passProps.key}
+            source={{ uri: htmlAttrs.src }}
+            style={imageStyle}
+          />
+        );
+      },
+      p: (htmlAttrs, children, cssStyles, passProps) => {
+        return <Paragraph key={passProps.key}>{children}</Paragraph>;
+      },
+    },
+  };
+
   return (
     <View>
       <BaseView
@@ -68,22 +105,7 @@ export default function Question({ navigation }) {
 
           <QuestionView>
             <Heading4>Texto base</Heading4>
-            <Paragraph>
-              O planejamento dos testes deve ocorrer em diferentes níveis e em
-              paralelo com o desenvolvimento do software. Com relação a esse
-              assunto, analise a imagem (a seguir) que mostra um modelo V
-              descrevendo o paralelismo entre as atividades de desenvolvimento e
-              teste de software.
-            </Paragraph>
-
-            <VerticalSpacer size={16} />
-
-            <Heading4>Enunciado</Heading4>
-            <Paragraph>
-              As lacunas I e II são preenchidas, correta e respectivamente, por:
-            </Paragraph>
-
-            <VerticalSpacer size={16} />
+            <HTML html={baseText} {...htmlRenderProps} />
 
             <RadioGroup options={questionOptions} />
           </QuestionView>

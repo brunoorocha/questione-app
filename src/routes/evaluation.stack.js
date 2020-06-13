@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import EnterCode from '../screens/enter-code';
-import Question from '../screens/question/Question';
+import Question from '../screens/question';
 import QuestionDetails from '../screens/question-details/QuestionDetails';
 import QuestionList from '../screens/question-list/QuestionList';
 import { routesNames } from './routesNames';
