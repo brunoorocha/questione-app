@@ -3,13 +3,13 @@ import { View } from 'react-native';
 import { RadioButton } from './RadioButton';
 
 export const RadioGroup = ({ options, onChange }) => {
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
 
-  const _onChange = (option) => {
-    setSelectedOption(option);
+  const _onChange = (index) => {
+    setSelectedOptionIndex(index);
 
     if (onChange) {
-      onChange(option);
+      onChange(index);
     }
   };
 
@@ -18,11 +18,11 @@ export const RadioGroup = ({ options, onChange }) => {
       {options &&
         options.map((option, key) => (
           <RadioButton
-            key={key}
+            key={`${key}`}
             label={option}
-            isSelected={option === selectedOption}
+            isSelected={key === selectedOptionIndex}
             onPress={() => {
-              _onChange(option);
+              _onChange(key);
             }}
           />
         ))}

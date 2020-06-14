@@ -17,7 +17,7 @@ Icon.loadFont();
 export default function Question({ navigation, questions }) {
   const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
 
-  const onPressAboutQuestionButton = () => {
+  const onPressAboutQuestionButton = (question) => {
     navigation.push(routesNames.questionDetails);
   };
 
