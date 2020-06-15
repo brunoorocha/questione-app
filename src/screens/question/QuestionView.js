@@ -88,6 +88,10 @@ export const QuestionView = ({
   const questionOptions = question.items?.map((item) => (
     <HTML html={item.description} {...htmlRenderProps} />
   ));
+  const selectedOptionIndex = question.items
+    ?.map((item) => item.id)
+    ?.indexOf(question.answerId);
+
   const showBackwardButton = questionIndex > 0;
   const showFinishButton = questionIndex + 1 === numberOfQuestions;
 
@@ -111,7 +115,10 @@ export const QuestionView = ({
           <VerticalSpacer />
 
           <Heading4>Alternativas</Heading4>
-          <RadioGroup options={questionOptions} />
+          <RadioGroup
+            options={questionOptions}
+            selectedOption={selectedOptionIndex}
+          />
         </QuestionContentView>
 
         <ButtonsView>

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { RadioButton } from './RadioButton';
 
-export const RadioGroup = ({ options, onChange }) => {
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+export const RadioGroup = ({ options, onChange, selectedOption }) => {
+  // eslint-disable-next-line prettier/prettier
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(selectedOption);
 
   const _onChange = (index) => {
     setSelectedOptionIndex(index);

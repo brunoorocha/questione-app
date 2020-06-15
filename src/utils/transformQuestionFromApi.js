@@ -11,6 +11,6 @@ export const transformQuestionFromApi = (question) => {
       question.evaluation_question_without_correct?.question_without_correct
         ?.question_items_without_correct,
     isAnswered: !!question.answer,
-    answer: question.answer,
+    answerId: question.answer,
   };
 };
