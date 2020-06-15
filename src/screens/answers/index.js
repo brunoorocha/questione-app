@@ -1,9 +1,9 @@
 import React from 'react';
 import Answers from './Answers';
-import { useEvaluationContext } from '../../contexts/evaluation';
+import { useAnsweredEvaluationsContext } from '../../contexts/answered-evaluations';
 
 export default function TestDetailsContainer(props) {
-  const { state } = useEvaluationContext();
+  const { state } = useAnsweredEvaluationsContext();
 
   return (
     <Answers

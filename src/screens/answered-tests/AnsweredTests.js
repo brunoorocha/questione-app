@@ -13,14 +13,14 @@ import { routesNames } from '../../routes/routesNames';
 export default function AnsweredTests({
   navigation,
   evaluations = [],
-  getEvaluations = () => {},
+  getAnsweredEvaluations = () => {},
   setSelectedEvaluation = () => {},
   isLoadingEvaluations,
 }) {
   const isEmpty = evaluations.length === 0;
 
   useEffect(() => {
-    getEvaluations();
+    getAnsweredEvaluations();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

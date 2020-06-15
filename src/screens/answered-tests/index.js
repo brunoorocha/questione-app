@@ -1,19 +1,21 @@
 import React from 'react';
 import AnsweredTests from './AnsweredTests';
-import { useEvaluationContext } from '../../contexts/evaluation';
+import { useAnsweredEvaluationsContext } from '../../contexts/answered-evaluations';
 
 export default function AnsweredTestsContainer(props) {
   const {
     state,
-    getEvaluations,
+    getAnsweredEvaluations,
     setSelectedEvaluation,
-  } = useEvaluationContext();
+  } = useAnsweredEvaluationsContext();
   const contextProps = {
-    evaluations: state.evaluations,
-    isLoadingEvaluations: state.isLoadingEvaluations,
-    getEvaluations,
+    evaluations: state.answeredEvaluations,
+    isLoadingEvaluations: state.isLoadingAnsweredEvaluations,
+    getAnsweredEvaluations,
     setSelectedEvaluation,
   };
+
+  console.log(state);
 
   return <AnsweredTests {...props} {...contextProps} />;
 }
