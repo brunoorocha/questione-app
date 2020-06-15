@@ -16,6 +16,9 @@ Icon.loadFont();
 
 export default function Question({ navigation, questions }) {
   const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+  const numberOfQuestions = questions.length ?? 0;
+  const navigationTitle = `Questão ${currentQuestionNumber} de ${numberOfQuestions}`;
 
   const onPressAboutQuestionButton = (question) => {
     navigation.push(routesNames.questionDetails);
@@ -33,18 +36,25 @@ export default function Question({ navigation, questions }) {
     setIsActionSheetOpen(false);
   };
 
+  const onChangeCurrentQuestion = (questionIndex) => {
+    setCurrentQuestionNumber(questionIndex + 1);
+  };
+
   return (
     <View>
       <BaseView
         title={
           <QuestionListButton
-            title="Questão 1 de 10"
+            title={navigationTitle}
             onPress={onPressQuestionListButton}
           />
         }
         navigationShowBackButton={false}
         navigationRightItem={<MoreButton onPress={onPressMoreButton} />}>
-        <QuestionFlatList questions={questions} />
+        <QuestionFlatList
+          questions={questions}
+          onChangeCurrentQuestion={onChangeCurrentQuestion}
+        />
       </BaseView>
 
       <ActionSheet
