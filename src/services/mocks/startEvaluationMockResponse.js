@@ -346,7 +346,7 @@ export const mockedResponse = [
   },
   {
     id: 6373,
-    answer: null,
+    answer: 3521,
     fk_evaluation_question_id: 643,
     fk_aluno_id: null,
     fk_aplication_evaluation_id: null,

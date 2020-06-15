@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import EnterCode from '../screens/enter-code';
 import Question from '../screens/question';
 import QuestionDetails from '../screens/question-details/QuestionDetails';
-import QuestionList from '../screens/question-list/QuestionList';
+import QuestionList from '../screens/question-list';
 import { routesNames } from './routesNames';
 
 const EvaluationStack = createStackNavigator();
