@@ -19,6 +19,7 @@ import {
   QuestionContentView,
   QuestionImageContainer,
   ButtonsView,
+  View,
 } from './styles';
 
 const htmlRenderProps = {
@@ -75,10 +76,20 @@ const htmlRenderProps = {
   },
 };
 
-export const QuestionView = ({ question, onPressAboutQuestionButton }) => {
+export const QuestionView = ({
+  question,
+  questionIndex,
+  numberOfQuestions,
+  onPressAboutQuestionButton = () => {},
+  onPressBackwardButton = () => {},
+  onPressForwardButton = () => {},
+  onPressFinishButton = () => {},
+}) => {
   const questionOptions = question.items?.map((item) => (
     <HTML html={item.description} {...htmlRenderProps} />
   ));
+  const showBackwardButton = questionIndex > 0;
+  const showFinishButton = questionIndex + 1 === numberOfQuestions;
 
   return (
     <QuestionListItem>
@@ -104,9 +115,23 @@ export const QuestionView = ({ question, onPressAboutQuestionButton }) => {
         </QuestionContentView>
 
         <ButtonsView>
-          <BackwardButton>Anterior</BackwardButton>
+          <View>
+            {showBackwardButton && (
+              <BackwardButton onPress={onPressBackwardButton}>
+                Anterior
+              </BackwardButton>
+            )}
+          </View>
           <HorizontalSpacer />
-          <ForwardButton>Próxima</ForwardButton>
+          {showFinishButton ? (
+            <ForwardButton onPress={onPressFinishButton}>
+              Finalizar
+            </ForwardButton>
+          ) : (
+            <ForwardButton onPress={onPressForwardButton}>
+              Próxima
+            </ForwardButton>
+          )}
         </ButtonsView>
       </Content>
     </QuestionListItem>
