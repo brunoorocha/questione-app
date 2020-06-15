@@ -14,11 +14,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 Icon.loadFont();
 
-export default function Question({ navigation, questions }) {
+export default function Question({
+  navigation,
+  questions,
+  currentQuestionIndex,
+  numberOfQuestions,
+}) {
   const [isActionSheetOpen, setIsActionSheetOpen] = useState(false);
-  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
-  const numberOfQuestions = questions.length ?? 0;
-  const navigationTitle = `Questão ${currentQuestionNumber} de ${numberOfQuestions}`;
+  // eslint-disable-next-line prettier/prettier
+  const navigationTitle = `Questão ${currentQuestionIndex + 1} de ${numberOfQuestions}`;
 
   const onPressAboutQuestionButton = (question) => {
     navigation.push(routesNames.questionDetails);
@@ -36,10 +40,6 @@ export default function Question({ navigation, questions }) {
     setIsActionSheetOpen(false);
   };
 
-  const onChangeCurrentQuestion = (questionIndex) => {
-    setCurrentQuestionNumber(questionIndex + 1);
-  };
-
   return (
     <View>
       <BaseView
@@ -51,10 +51,7 @@ export default function Question({ navigation, questions }) {
         }
         navigationShowBackButton={false}
         navigationRightItem={<MoreButton onPress={onPressMoreButton} />}>
-        <QuestionFlatList
-          questions={questions}
-          onChangeCurrentQuestion={onChangeCurrentQuestion}
-        />
+        <QuestionFlatList questions={questions} />
       </BaseView>
 
       <ActionSheet

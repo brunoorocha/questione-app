@@ -8,6 +8,8 @@ const EvaluationContext = createContext();
 export const EvaluationContextProvider = ({ children }) => {
   const initialState = {
     evaluationQuestions: [],
+    numberOfQuestions: 0,
+    currentQuestionIndex: 0,
     isLoadingEvaluationQuestions: false,
   };
 
@@ -33,11 +35,23 @@ export const EvaluationContextProvider = ({ children }) => {
     }
   };
 
+  const setCurrentQuestionIndex = ({ questionIndex }) => {
+    if (questionIndex === undefined) {
+      return;
+    }
+
+    dispatch({
+      type: actionTypes.SET_CURRENT_QUESTION_NUMBER,
+      payload: { questionIndex },
+    });
+  };
+
   return (
     <EvaluationContext.Provider
       value={{
         state,
         startEvaluation,
+        setCurrentQuestionIndex,
       }}>
       {children}
     </EvaluationContext.Provider>

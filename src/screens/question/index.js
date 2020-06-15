@@ -4,5 +4,11 @@ import { useEvaluationContext } from '../../contexts/evaluation';
 
 export default function QuestionContainer(props) {
   const { state } = useEvaluationContext();
-  return <Question {...props} questions={state.evaluationQuestions} />;
+  const contextProps = {
+    questions: state.evaluationQuestions,
+    currentQuestionIndex: state.currentQuestionIndex,
+    numberOfQuestions: state.numberOfQuestions,
+  };
+
+  return <Question {...props} {...contextProps} />;
 }

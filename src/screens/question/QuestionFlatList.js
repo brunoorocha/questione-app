@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FlatList, Dimensions } from 'react-native';
 import { QuestionView } from './QuestionView';
+import { useEvaluationContext } from '../../contexts/evaluation';
 
-export const QuestionFlatList = ({ questions, onChangeCurrentQuestion }) => {
+export const QuestionFlatList = ({ questions }) => {
   const [currentScrollIndex, setCurrentScrollIndex] = useState(0);
   const windowWidth = Dimensions.get('window').width;
   const maxScrollX = (questions.length - 1) * windowWidth;
+  const { setCurrentQuestionIndex } = useEvaluationContext();
 
   const onScroll = (event) => {
     const offsetX = event.nativeEvent.contentOffset.x;
@@ -16,7 +18,7 @@ export const QuestionFlatList = ({ questions, onChangeCurrentQuestion }) => {
     const index = Math.floor(offsetX / windowWidth);
     if (index !== currentScrollIndex) {
       setCurrentScrollIndex(index);
-      onChangeCurrentQuestion(index);
+      setCurrentQuestionIndex({ questionIndex: index });
     }
   };
 
