@@ -6,7 +6,11 @@ import {
   QuestionItemState,
 } from '../../components';
 
-export default function QuestionList({ navigation, questions = [] }) {
+export default function QuestionList({
+  navigation,
+  questions = [],
+  setCurrentQuestionIndex = () => {},
+}) {
   const questionList = questions.map((question, index) => ({
     id: index + 1,
     title: `Questão ${index + 1}`,
@@ -19,12 +23,20 @@ export default function QuestionList({ navigation, questions = [] }) {
     navigation.goBack();
   };
 
+  const onSelectQuestionWithIndex = (index) => {
+    setCurrentQuestionIndex({ questionIndex: index });
+    navigation.goBack();
+  };
+
   return (
     <BaseView
       title="Questões"
       navigationShowBackButton={false}
       navigationRightItem={<CloseButton onPress={onPressCloseButton} />}>
-      <QuestionFlatList questions={questionList} />
+      <QuestionFlatList
+        questions={questionList}
+        onSelect={onSelectQuestionWithIndex}
+      />
     </BaseView>
   );
 }

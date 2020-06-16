@@ -2,25 +2,21 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { QuestionListItem } from './QuestionListItem';
 
-export const QuestionFlatList = ({ questions, onSelect, isSelectable }) => {
-  const _isSelectable = isSelectable === undefined ? true : false;
-
-  const _onSelect = (question) => {
-    if (onSelect) {
-      onSelect(question);
-    }
-  };
-
+export const QuestionFlatList = ({
+  questions,
+  isSelectable = true,
+  onSelect = () => {},
+}) => {
   return (
     <FlatList
       data={questions}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <QuestionListItem
           title={item.title}
           state={item.state}
-          isSelectable={_isSelectable}
+          isSelectable={isSelectable}
           onPress={() => {
-            _onSelect(item);
+            onSelect(index);
           }}
         />
       )}

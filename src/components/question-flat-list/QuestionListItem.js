@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../colors/Colors';
 
@@ -37,10 +38,12 @@ export const QuestionItemState = {
   wrong: 'wrong',
 };
 
-export const QuestionListItem = ({ title, state, onPress, isSelectable }) => {
-  const _isSelectable = isSelectable === undefined ? true : isSelectable;
-  const _state = state ?? QuestionItemState.notAnswered;
-
+export const QuestionListItem = ({
+  title,
+  isSelectable = true,
+  state = QuestionItemState.notAnswered,
+  onPress = () => {},
+}) => {
   const _stateCheckmark = {
     notAnswered: {
       icon: null,
@@ -60,15 +63,23 @@ export const QuestionListItem = ({ title, state, onPress, isSelectable }) => {
     },
   };
 
+  const underlayColor = isSelectable ? colors.lightGray : null;
+
   return (
-    <QuestionListItemWrapper>
-      <StateCheckmark color={_stateCheckmark[_state].color}>
-        {_stateCheckmark[_state].icon}
-      </StateCheckmark>
-      <QuestionTitle>{title}</QuestionTitle>
-      {_isSelectable && (
-        <Icon name="keyboard-arrow-right" size={24} color={colors.textColor} />
-      )}
-    </QuestionListItemWrapper>
+    <TouchableHighlight onPress={onPress} underlayColor={underlayColor}>
+      <QuestionListItemWrapper>
+        <StateCheckmark color={_stateCheckmark[state].color}>
+          {_stateCheckmark[state].icon}
+        </StateCheckmark>
+        <QuestionTitle>{title}</QuestionTitle>
+        {isSelectable && (
+          <Icon
+            name="keyboard-arrow-right"
+            size={24}
+            color={colors.textColor}
+          />
+        )}
+      </QuestionListItemWrapper>
+    </TouchableHighlight>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import { FlatList, Dimensions } from 'react-native';
 import { QuestionView } from './QuestionView';
 import { useEvaluationContext } from '../../contexts/evaluation';
@@ -9,6 +9,15 @@ export const QuestionFlatList = ({ questions }) => {
   const maxScrollX = (questions.length - 1) * windowWidth;
   const { setCurrentQuestionIndex, state } = useEvaluationContext();
   const flatListRef = createRef();
+
+  useEffect(() => {
+    if (state.currentQuestionIndex !== currentScrollIndex) {
+      flatListRef?.current?.scrollToIndex({
+        index: state.currentQuestionIndex,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   const onScroll = (event) => {
     const offsetX = event.nativeEvent.contentOffset.x;
